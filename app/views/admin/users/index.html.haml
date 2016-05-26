@@ -1,0 +1,14 @@
+.box.box-primary
+  .box-header.with-border
+    %h3.box-title Users
+  .box-body
+    .box-body.table-response
+      %table.table
+        %thead
+          %tr
+            %th Name
+            %th Skills
+            %th Training need
+            %th Teams
+        %tbody
+          = render @users

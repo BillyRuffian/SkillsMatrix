@@ -30,10 +30,9 @@
       / Content Wrapper. Contains page content
       .content-wrapper
         / Content Header (Page header)
-        %section.content-header
-          %h1
-            Fixed Layout
-            %small Blank example to the fixed layout
+        - if content_for? :content_header
+          %section.content-header
+            = yield :content_header
         / Main content
         %section.content
           - if alert

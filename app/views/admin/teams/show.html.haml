@@ -1,0 +1,46 @@
+- content_for :content_header do
+  %h1= @team.name
+
+.row
+  .col-md-6
+    / Users list
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Members
+      .box-body.table-response
+        - if ! @users.blank?
+          %table.table
+            %thead
+              %tr
+                %th Email
+                %th Skills
+                %th Training need
+            %tbody
+              - @users.each do |user|
+                %tr
+                  %td= user.email
+                  %td= Skill.for_user(user).acquired.count
+                  %td= Skill.for_user(user).training.count
+        - else
+          %p There are no members of this team
+  .col-md-6
+    / Skills list
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Recommended skills
+      .box-body.table-response
+        - if ! @skills.blank?
+          %table.table
+            %thead
+              %tr
+                %th Skill
+                %th Members with skill
+                %th Training Needed
+            %tbody
+              - @skills.each do |skill|
+                %tr
+                  %td= skill.name
+                  %td= skill.claims.select{ |c| @users.include? c.user and not [:training, :nr].include? c.level }.count
+                  %td= skill.claims.select{ |c| @users.include? c.user and c.level == :training }.count
+        - else
+          %p There are no recommended skills for this team

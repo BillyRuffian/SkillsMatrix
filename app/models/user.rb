@@ -5,7 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :claims, -> { includes :skill }, dependent: :destroy
-  has_many :skills, through: :claims
 
   has_and_belongs_to_many :teams
+
+  def first_sign_in?
+    current_sign_in_at == last_sign_in_at
+  end
 end

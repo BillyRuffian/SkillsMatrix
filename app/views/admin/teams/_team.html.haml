@@ -1,0 +1,8 @@
+%tr{id: team.id}
+  %td
+    - if can? :read, team
+      = link_to( team.name, admin_team_path( team ) )
+    - else
+      team.name
+  %td= team.users.count
+  %td= team.skills.count

@@ -1,14 +1,5 @@
+- content_for :content_header do
+  %h1
+    All skills
 
-.box
-  .box-header.with-border
-    %h3.box-title All Skills
-  .box-body.table-response.no-padding
-    %table.table
-      %thead
-        %tr
-          %th Name
-          %th Type
-          %th Description
-          %th
-      %tbody
-        = render @skills
+= render partial: 'skills_table', locals:{ skills: @skills }

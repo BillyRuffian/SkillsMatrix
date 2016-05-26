@@ -1,6 +1,22 @@
 %h1 Welcome#index
 %p Find me in app/views/welcome/index.html.haml
 
+- if ! @new_skills.blank?
+  .row
+    .col-md-6
+      .small-box.bg-aqua
+        .inner
+          %h3= @new_skills.count
+          %p
+            = 'New skill'.pluralize( @new_skills.count )
+            added since you last signed in
+        .icon
+          %i.fa.fa-check-circle
+        %a.small-box-footer{ href: recent_skills_path }
+          More info
+          %i.fa.fa-arrow-circle-right
+
+
 .row
   -# Skill tags
   .col-md-6

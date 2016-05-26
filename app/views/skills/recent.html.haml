@@ -1,0 +1,6 @@
+- content_for :content_header do
+  %h1
+    Recent skills
+    %small added since you last signed in
+
+= render partial: 'skills_table', locals:{ skills: @new_skills }

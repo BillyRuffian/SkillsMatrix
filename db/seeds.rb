@@ -6,10 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Skill.delete_all
+Skill.destroy_all
 
 Skill.create name: 'Java', context: 'Language'
 Skill.create name: 'C', context: 'Language'
 Skill.create name: 'C++', context: 'Language'
 Skill.create name: 'Ruby', context: 'Language'
 Skill.create name: 'Rails', context: 'Framework'
+
+
+Team.destroy_all
+
+Team.create name: 'Test team 1'
+Team.create name: 'Test team 2'

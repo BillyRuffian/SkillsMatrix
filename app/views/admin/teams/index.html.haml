@@ -1,0 +1,13 @@
+.box.box-primary
+  .box-header.with-border
+    %h3.box-title Teams
+  .box-body
+    .box-body.table-response
+      %table.table
+        %thead
+          %tr
+            %th Name
+            %th Members
+            %th Skills
+        %tbody
+          = render @teams
