@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :claims, -> { includes :skill }, dependent: :destroy
   has_many :skills, through: :claims
+
+  has_and_belongs_to_many :teams
 end
