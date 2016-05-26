@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title Skills Matrix
+    / Tell the browser to be responsive to screen width
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
+  %body{ class: "hold-transition skin-blue fixed sidebar-mini #{controller_name} #{action_name}" }
+    / Site wrapper
+    .wrapper
+      %header.main-header
+        / Logo
+        %a.logo{href: "#{root_path}"}
+          / mini logo for sidebar mini 50x50 pixels
+          %span.logo-mini
+            %b> Skills
+          / logo for regular state and mobile devices
+          %span.logo-lg
+            %b> Skills
+            Matrix
+        = render 'shared/navbar'
+      / ===============================================
+      = render 'shared/sidebar'
+      / ===============================================
+      / Content Wrapper. Contains page content
+      .content-wrapper
+        / Content Header (Page header)
+        %section.content-header
+          %h1
+            Fixed Layout
+            %small Blank example to the fixed layout
+        / Main content
+        %section.content
+          - if alert
+            .callout.callout-danger
+              %h4 Oops
+              %p= alert
+          - if notice
+            .callout.callout-info
+              %h4 Information
+              %p= notice
+          / Default box
+          = yield
+        / /.content
+      / /.content-wrapper
+      = render 'shared/footer'
+    / ./wrapper
+    =# javascript_include_tag 'application', 'data-turbolinks-track': 'reload'

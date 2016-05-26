@@ -1,0 +1,33 @@
+/ Left side column. contains the sidebar
+%aside.main-sidebar
+  / sidebar: style can be found in sidebar.less
+  %section.sidebar
+    - if user_signed_in?
+      .user-panel
+        .info.pull-left
+          %p= current_user.email
+    / sidebar menu: : style can be found in sidebar.less
+    %ul.sidebar-menu
+      %li.header MAIN NAVIGATION
+      %li
+        %a{:href => root_path }
+          %i.fa.fa-dashboard
+          %span Dashboard
+      %li
+        %a{:href => skills_path }
+          %i.fa.fa-list
+          %span All skills
+      %li.header LABELS
+      %li
+        %a{:href => "#"}
+          %i.fa.fa-circle-o.text-red
+          %span Important
+      %li
+        %a{:href => "#"}
+          %i.fa.fa-circle-o.text-yellow
+          %span Warning
+      %li
+        %a{:href => "#"}
+          %i.fa.fa-circle-o.text-aqua
+          %span Information
+  / /.sidebar

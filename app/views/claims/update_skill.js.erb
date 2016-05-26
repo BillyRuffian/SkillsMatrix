@@ -1,0 +1,3 @@
+$('#<%= @skill.id %>').replaceWith("<%= escape_javascript render(@skill) %>");
+$('#<%= @skill.id %>').css({'background-color':'#dfeff5'}).
+    animate({'background-color':'#fff'}, 1000);

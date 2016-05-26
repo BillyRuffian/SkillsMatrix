@@ -1,0 +1,51 @@
+<script type="text/javascript">
+  function ready(fn) {
+    if (document.readyState != 'loading') {
+      fn();
+    }
+    else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  ready( function() {
+    var ctx = document.getElementById("claims-bar-chart");
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["Training need", "Basic skill", "Good skill", "Expert skill"],
+        datasets: [{
+          label: '# of skills',
+          backgroundColor: '#3c8dbc',
+          data: [
+            <%= claims.to_a.count{|c| c.level == :training} %>,
+            <%= claims.to_a.count{|c| c.level == :basic   } %>,
+            <%= claims.to_a.count{|c| c.level == :good    } %>,
+            <%= claims.to_a.count{|c| c.level == :expert  } %>
+          ]
+        }]
+      },
+      options: {
+        legend:{
+          display: false
+        },
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true,
+              stepSize: 1
+            }
+          }],
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }]
+        }
+      }
+    });
+  })
+</script>

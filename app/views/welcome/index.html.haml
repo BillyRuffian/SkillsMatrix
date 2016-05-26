@@ -1,0 +1,26 @@
+%h1 Welcome#index
+%p Find me in app/views/welcome/index.html.haml
+
+.row
+  -# Skill tags
+  .col-md-6
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Your skill list
+      .box-body
+        %p
+          - if ! current_user.claims.empty?
+            - current_user.claims.sort{ |a,b| a.skill.name <=> b.skill.name}.each do |claim|
+              = render partial: 'claim_tag', locals: {claim: claim}
+          - else
+            You have not added any skills yet
+  -# Claims bar chart
+  .col-md-6
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Expertise breakdown
+      .box-body
+        .chart
+          %canvas#claims-bar-chart{ style: 'height: 230px; width: 530px;' }
+
+= render partial: 'claims-bar-chart', formats: [:js], locals: {claims: @claims}
