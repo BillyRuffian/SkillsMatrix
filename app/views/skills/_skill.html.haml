@@ -4,30 +4,31 @@
   %td= skill.context
   %td
   %td
-    .btn-group.btn-fill
-      %a{class: "btn btn-sm btn-default dropdown-toggle #{color_for_claim(claim)} btn-fill", 'data-toggle': 'dropdown'}
-        %i{class: "fa #{icon_for_claim(claim)}"}
-        - if( !claim.blank? )
-          - if claim.level == :training
-            Training needed
-          -else
-            #{claim.level.capitalize} knowledge
-        - else
-          Not needed
-        %span.caret
-      %ul.dropdown-menu
-        %li.dropdown-header
-          = skill.name
-          skills
-        %li
-          = link_to_user_skill_claim '<i class="fa fa-close"></i>Not needed'.html_safe, skill, claim, {level: :nr}
-        %li.divider{role: 'separator'}
-        %li
-          = link_to_user_skill_claim '<i class="fa fa-graduation-cap"></i>Training required'.html_safe, skill, claim, {level: :training}
-        %li.divider{role: 'separator'}
-        %li
-          = link_to_user_skill_claim '<i class="fa fa-star-o"></i>Basic knowledge'.html_safe, skill, claim, {level: :basic}
-        %li
-          = link_to_user_skill_claim '<i class="fa fa-star-half-empty"></i>Good knowledge'.html_safe, skill, claim, {level: :good}
-        %li
-          = link_to_user_skill_claim '<i class="fa fa-star"></i>Expert knowledge'.html_safe, skill, claim, {level: :expert}
+    - if( claim and can? :update, claim ) or ( claim.blank? and can? :create, Claim )
+      .btn-group.btn-fill
+        %a{class: "btn btn-sm btn-default dropdown-toggle #{color_for_claim(claim)} btn-fill", 'data-toggle': 'dropdown'}
+          %i{class: "fa #{icon_for_claim(claim)}"}
+          - if( !claim.blank? )
+            - if claim.level == :training
+              Training needed
+            -else
+              #{claim.level.capitalize} knowledge
+          - else
+            Not needed
+          %span.caret
+        %ul.dropdown-menu
+          %li.dropdown-header
+            = skill.name
+            skills
+          %li
+            = link_to_user_skill_claim '<i class="fa fa-close"></i>Not needed'.html_safe, skill, claim, {level: :nr}
+          %li.divider{role: 'separator'}
+          %li
+            = link_to_user_skill_claim '<i class="fa fa-graduation-cap"></i>Training required'.html_safe, skill, claim, {level: :training}
+          %li.divider{role: 'separator'}
+          %li
+            = link_to_user_skill_claim '<i class="fa fa-star-o"></i>Basic knowledge'.html_safe, skill, claim, {level: :basic}
+          %li
+            = link_to_user_skill_claim '<i class="fa fa-star-half-empty"></i>Good knowledge'.html_safe, skill, claim, {level: :good}
+          %li
+            = link_to_user_skill_claim '<i class="fa fa-star"></i>Expert knowledge'.html_safe, skill, claim, {level: :expert}

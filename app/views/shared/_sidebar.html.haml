@@ -13,10 +13,11 @@
         %a{:href => root_path }
           %i.fa.fa-dashboard
           %span Dashboard
-      %li
-        %a{:href => skills_path }
-          %i.fa.fa-list
-          %span All skills
+      - if can? :read, :skills
+        %li
+          %a{:href => skills_path }
+            %i.fa.fa-list
+            %span All skills
       %li.header LABELS
       %li
         %a{:href => "#"}
