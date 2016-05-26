@@ -13,15 +13,15 @@
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ["Training need", "Basic skill", "Good skill", "Expert skill"],
+        labels: ["Expert skill", "Good skill", "Basic skill", "Training need"],
         datasets: [{
           label: '# of skills',
           backgroundColor: '#3c8dbc',
           data: [
-            <%= claims.to_a.count{|c| c.level == :training} %>,
-            <%= claims.to_a.count{|c| c.level == :basic   } %>,
-            <%= claims.to_a.count{|c| c.level == :good    } %>,
-            <%= claims.to_a.count{|c| c.level == :expert  } %>
+            <%= claims.to_a.count{|c| c.level == :expert   } %>,
+            <%= claims.to_a.count{|c| c.level == :good     } %>,
+            <%= claims.to_a.count{|c| c.level == :basic    } %>,
+            <%= claims.to_a.count{|c| c.level == :training } %>
           ]
         }]
       },

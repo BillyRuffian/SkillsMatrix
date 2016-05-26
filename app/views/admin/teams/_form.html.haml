@@ -1,0 +1,10 @@
+= form_for [:admin, @team] do |f|
+  .box.box-primary
+    .box-header.with-border
+      %h3.box-title Team
+    .box-body
+      .form-group
+        = f.label :name, 'Team name'
+        = f.text_field :name, class: 'form-control', autofocus: true
+    .box-footer
+      = f.submit 'Save', class: 'btn btn-primary'

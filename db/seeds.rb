@@ -9,10 +9,15 @@
 Skill.destroy_all
 
 Skill.create name: 'Java', context: 'Language'
+Skill.create name: 'Scala', context: 'Language'
 Skill.create name: 'C', context: 'Language'
 Skill.create name: 'C++', context: 'Language'
 Skill.create name: 'Ruby', context: 'Language'
 Skill.create name: 'Rails', context: 'Framework'
+Skill.create name: 'Node.js', context: 'Framework'
+Skill.create name: 'Play', context: 'Framework'
+Skill.create name: 'Dropwizard', context: 'Framework'
+Skill.create name: 'Vert.x', context: 'Framework'
 
 
 Team.destroy_all

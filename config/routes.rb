@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :skills do
     resources :claims
     get 'recent', on: :collection
+    get 'recommended', on: :collection
   end
   devise_for :users
   root to: 'welcome#index'

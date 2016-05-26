@@ -5,4 +5,10 @@ class SkillsController < ApplicationController
     authorize! :read, :skills
   end
 
+  def recommended
+    @skills = current_user.recommended_skills
+    @teams  = current_user.teams 
+    authorize! :read, :skills
+  end
+
 end

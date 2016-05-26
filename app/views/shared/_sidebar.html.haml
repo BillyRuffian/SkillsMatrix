@@ -4,8 +4,11 @@
   %section.sidebar
     - if user_signed_in?
       .user-panel
+        .pull-left.image
+          = image_tag 'person.png', class: 'img-circle'
         .info.pull-left
           %p= current_user.email
+          = link_to 'sign out', destroy_user_session_path, method: :delete
     / sidebar menu: : style can be found in sidebar.less
     %ul.sidebar-menu
       / User menu
@@ -25,6 +28,11 @@
               %a{:href => skills_path }
                 %i.fa.fa-circle-o
                 %span All skills
+
+            %li
+              %a{:href => recommended_skills_path }
+                %i.fa.fa-circle-o
+                %span Recommended skills
             %li
               %a{:href => recent_skills_path }
                 %i.fa.fa-circle-o

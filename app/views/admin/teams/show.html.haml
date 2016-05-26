@@ -1,5 +1,9 @@
 - content_for :content_header do
-  %h1= @team.name
+  %h1
+    = @team.name
+    .pull-right
+      = button_to 'Edit', edit_admin_team_path(@team), class: 'btn btn-xs btn-primary', form_class: 'form-inline', method: :get
+      = button_to 'Delete team', admin_team_path(@team), method: :delete, class: 'btn btn-xs btn-danger', form_class: 'form-inline', data: {confirm: "Are you sure you want to delete the '#{@team.name}' team?"}
 
 .row
   .col-md-6
@@ -66,23 +70,24 @@
                   %td= user.email
                   - @skills.each do |skill|
                     %td
-                      %i{class: "fa #{icon_for_claim(user.claims.for_skill( skill ).first)}"}
+                      %span
+                        %i{class: "fa #{icon_for_claim(user.claims.for_skill( skill ).first)}"}
           .box-footer
             .pull-right.text-muted
               Key:
-              %span.label.label-default
+              %span.label.label-default.label-inline
                 %i.fa.fa-close
                 No skill
-              %span.label.label-default
+              %span.label.label-default.label-inline
                 %i.fa.fa-graduation-cap
                 Training needed
-              %span.label.label-default
+              %span.label.label-default.label-inline
                 %i.fa.fa-star-o
                 Basic knowledge
-              %span.label.label-default
+              %span.label.label-default.label-inline
                 %i.fa.fa-star-half-empty
                 Good knowledge
-              %span.label.label-default
+              %span.label.label-default.label-inline
                 %i.fa.fa-star
                 Expert knowledge
         - else

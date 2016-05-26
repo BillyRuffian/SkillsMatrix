@@ -1,6 +1,8 @@
 .box.box-primary
   .box-header.with-border
     %h3.box-title Teams
+    .box-tools
+      = link_to 'New team', new_admin_team_path, class: 'btn btn-sm btn-info'
   .box-body
     .box-body.table-response
       %table.table

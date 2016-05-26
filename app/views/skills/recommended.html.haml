@@ -1,0 +1,11 @@
+- content_for :content_header do
+  %h1
+    Recommended skills
+    %small
+      based on your team membership of
+      = @teams.map{ |t| t.name}.to_a.to_sentence
+
+- if ! @skills.blank?
+  = render partial: 'skills_table', locals:{ skills: @skills }
+- else
+  %p You have no recommended skills
