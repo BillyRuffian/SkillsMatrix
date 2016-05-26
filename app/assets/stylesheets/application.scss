@@ -25,3 +25,20 @@
   width: 100%;
   max-width: 150px;
 }
+
+@supports not (writing-mode:vertical-rl) {
+    table div.rotated {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        white-space: nowrap;
+    }
+}
+
+.rotated{
+  -webkit-writing-mode:vertical-rl;
+  -ms-writing-mode:tb-rl;
+  writing-mode:vertical-rl;
+  -webkit-transform: rotate(180deg) translate(8px,0px);
+  -moz-transform: rotate(180deg) translate(8px,0px);
+white-space: nowrap;
+}

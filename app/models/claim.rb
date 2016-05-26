@@ -2,6 +2,9 @@ class Claim < ApplicationRecord
   belongs_to :user
   belongs_to :skill
 
+  scope :for_skill, -> skill { where( skill_id: skill.id ) }
+  scope :for_user,  -> user  { where( user_id:  user.id  ) }
+
   LEVELS = %i{
     nr
     training

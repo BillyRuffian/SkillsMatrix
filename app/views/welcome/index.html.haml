@@ -1,9 +1,11 @@
 %h1 Welcome#index
 %p Find me in app/views/welcome/index.html.haml
 
-- if ! @new_skills.blank?
-  .row
-    .col-md-6
+
+.row
+  -# Skill tags
+  .col-md-6
+    - if ! @new_skills.blank?
       .small-box.bg-aqua
         .inner
           %h3= @new_skills.count
@@ -16,10 +18,6 @@
           More info
           %i.fa.fa-arrow-circle-right
 
-
-.row
-  -# Skill tags
-  .col-md-6
     .box.box-primary
       .box-header.with-border
         %h3.box-title Your skill list
@@ -30,6 +28,19 @@
               = render partial: 'claim_tag', locals: {claim: claim}
           - else
             You have not added any skills yet
+
+    .box.box-success
+      .box-header.with-border
+        %h3.box-title Your recommended skills
+      .box-body
+        %p
+          - claimed_skills = current_user.skills_claimed
+          - if ! @recommended_skills.empty?
+            - @recommended_skills.each do |skill|
+              = render partial: 'recommended_skill_tag', locals:{ user: current_user, skill: skill, user_skills: claimed_skills }
+          - else
+            You do not have any recommended skills
+
   -# Claims bar chart
   .col-md-6
     .box.box-primary

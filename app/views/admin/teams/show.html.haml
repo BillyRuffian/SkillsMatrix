@@ -25,7 +25,7 @@
           %p There are no members of this team
   .col-md-6
     / Skills list
-    .box.box-primary
+    .box.box-warning
       .box-header.with-border
         %h3.box-title Recommended skills
       .box-body.table-response
@@ -44,3 +44,48 @@
                   %td= skill.claims.select{ |c| @users.include? c.user and c.level == :training }.count
         - else
           %p There are no recommended skills for this team
+
+.row
+  .col-md-12
+    .box.box-success
+      .box-header.with-border
+        %h3.box-title Team Skills Matrix
+
+      .box-body.table-response
+        - if ! @skills.blank? && ! @users.blank?
+          %table.table
+            %thead
+              %tr
+                %th Member
+                - @skills.each do |skill|
+                  %th
+                    %span.rotated= skill.name
+            %tbody
+              - @users.each do |user|
+                %tr
+                  %td= user.email
+                  - @skills.each do |skill|
+                    %td
+                      %i{class: "fa #{icon_for_claim(user.claims.for_skill( skill ).first)}"}
+          .box-footer
+            .pull-right.text-muted
+              Key:
+              %span.label.label-default
+                %i.fa.fa-close
+                No skill
+              %span.label.label-default
+                %i.fa.fa-graduation-cap
+                Training needed
+              %span.label.label-default
+                %i.fa.fa-star-o
+                Basic knowledge
+              %span.label.label-default
+                %i.fa.fa-star-half-empty
+                Good knowledge
+              %span.label.label-default
+                %i.fa.fa-star
+                Expert knowledge
+        - else
+          %p
+            You must have assigned both skills and members to this team
+            before you can see the skills matrix
