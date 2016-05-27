@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/amatsuda/kaminari.git
+  revision: 384d5cc9adcdd2ce27e83531961943406241acc8
+  specs:
+    kaminari (1.0.0.alpha)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -41,8 +49,6 @@ GEM
       tzinfo (~> 1.1)
     arel (7.0.0)
     bcrypt (3.1.11)
-    bootstrap-slider-rails (7.0.3)
-      railties (>= 3.2, < 5.0)
     builder (3.2.2)
     byebug (9.0.4)
     cancancan (1.14.0)
@@ -196,7 +202,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-slider-rails
   byebug
   cancancan
   chart-js-rails
@@ -207,6 +212,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  kaminari!
   listen (~> 3.0.5)
   puma (~> 3.0)
   rails (>= 5.0.0.rc1, < 5.1)

@@ -18,7 +18,7 @@
           %i.fa.fa-dashboard
           %span Dashboard
       - if can? :read, Skill
-        %li.treeview
+        %li.treeview{ class: active_menu(:skills) }
           %a{href:'#'}
             %i.fa.fa-list
             Skills
@@ -28,7 +28,10 @@
               %a{:href => skills_path }
                 %i.fa.fa-circle-o
                 %span All skills
-
+            %li
+              %a{:href => your_skills_path }
+                %i.fa.fa-circle-o
+                %span Your skills
             %li
               %a{:href => recommended_skills_path }
                 %i.fa.fa-circle-o

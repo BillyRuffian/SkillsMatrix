@@ -6,8 +6,8 @@ class Admin::TeamsController < ApplicationController
 
   def show
     @team = Team.find( params[:id] )
-    @users = @team.users
-    @skills = @team.skills
+    @users = @team.users.order :email
+    @skills = @team.skills.order :name
     authorize! :read, @team
   end
 

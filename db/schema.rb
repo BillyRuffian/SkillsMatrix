@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526095343) do
+ActiveRecord::Schema.define(version: 20160527094935) do
 
   create_table "claims", force: :cascade do |t|
     t.integer  "level"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20160526095343) do
   create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.string   "context"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
     t.index ["context"], name: "index_skills_on_context"
     t.index ["name"], name: "index_skills_on_name"
   end

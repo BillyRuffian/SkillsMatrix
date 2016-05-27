@@ -33,8 +33,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml-rails'
 gem 'cancancan'
 gem 'devise'
+gem "kaminari", github: "amatsuda/kaminari"
 gem 'jquery-ui-rails'
-gem 'bootstrap-slider-rails'
 gem 'font-awesome-sass', '~> 4.6.2'
 source 'https://rails-assets.org' do
   gem 'rails-assets-ionicons'

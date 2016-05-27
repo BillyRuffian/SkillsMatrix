@@ -3,7 +3,7 @@
     Recent skills
     %small added since you last signed in
 
-- if ! @new_skills.blank?
-  = render partial: 'skills_table', locals:{ skills: @new_skills }
+- if ! @skills.blank?
+  = render partial: 'skills_table', locals:{ skills: @skills }
 - else
   %p No new skills have been added

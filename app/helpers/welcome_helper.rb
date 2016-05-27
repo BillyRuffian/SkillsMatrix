@@ -22,7 +22,7 @@ module WelcomeHelper
         'fa-check'
       end
     else
-      'fa-close'
+      'fa-circle-o'
     end
   end
 

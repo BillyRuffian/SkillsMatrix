@@ -16,12 +16,13 @@
           - else
             Not needed
           %span.caret
-        %ul.dropdown-menu
+        %ul.dropdown-menu.pull-right
           %li.dropdown-header
             = skill.name
             skills
+          %li.divider{role: 'separator'}
           %li
-            = link_to_user_skill_claim '<i class="fa fa-close"></i>Not needed'.html_safe, skill, claim, {level: :nr}
+            = link_to_user_skill_claim '<i class="fa fa-circle-o"></i>Not needed'.html_safe, skill, claim, {level: :nr}
           %li.divider{role: 'separator'}
           %li
             = link_to_user_skill_claim '<i class="fa fa-graduation-cap"></i>Training required'.html_safe, skill, claim, {level: :training}

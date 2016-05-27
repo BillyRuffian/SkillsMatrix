@@ -18,12 +18,21 @@
               %tr
                 %th Email
                 %th Skills
+                %th Skill match
                 %th Training need
             %tbody
               - @users.each do |user|
                 %tr
                   %td= user.email
                   %td= Skill.for_user(user).acquired.count
+                  %td
+                    - if ! @skills.blank?
+                      - skill_match = (Skill.for_user(user).acquired & @skills).count
+                      = skill_match
+                      = '/'
+                      = number_to_percentage(skill_match.to_f / @skills.count.to_f * 100, precision: 2, strip_insignificant_zeros: true)
+                    - else
+                      = '-'
                   %td= Skill.for_user(user).training.count
         - else
           %p There are no members of this team
@@ -57,26 +66,28 @@
 
       .box-body.table-response
         - if ! @skills.blank? && ! @users.blank?
-          %table.table
+          %table.table.table-bordered
             %thead
               %tr
                 %th Member
                 - @skills.each do |skill|
-                  %th
-                    %span.rotated= skill.name
+                  %th.rotated
+                    %span= skill.name
             %tbody
               - @users.each do |user|
                 %tr
                   %td= user.email
                   - @skills.each do |skill|
                     %td
-                      %span
-                        %i{class: "fa #{icon_for_claim(user.claims.for_skill( skill ).first)}"}
+                      - claim = user.claims.for_skill( skill ).first
+                      - unless claim.blank?
+                        %span
+                          %i{class: "fa #{icon_for_claim(claim)}"}
           .box-footer
             .pull-right.text-muted
               Key:
               %span.label.label-default.label-inline
-                %i.fa.fa-close
+                %i.fa.fa-circle-o
                 No skill
               %span.label.label-default.label-inline
                 %i.fa.fa-graduation-cap

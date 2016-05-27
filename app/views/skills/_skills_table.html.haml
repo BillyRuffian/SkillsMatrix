@@ -1,13 +1,22 @@
 .box
   .box-header.with-border
     %h3.box-title Skills
+    .box-tools
+      = form_tag nil, method: :get do
+        .input-group.input-group-sm{ style: 'width: 150px;'}
+          = text_field_tag :search, @search_term, class: 'form-control pull-right', placeholder: 'Search'
+          .input-group-btn
+            %button.btn.btn-default{:type => "submit"}
+              %i.fa.fa-search
   .box-body.table-response
-    %table.table
+    %table.table.table-hover
       %thead
         %tr
           %th Name
           %th Type
           %th Description
-          %th
+          %th Expertise
       %tbody
         = render skills
+  .box-footer
+    = paginate skills, window: 3

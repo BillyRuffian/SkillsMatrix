@@ -1,12 +1,11 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
-
+- content_for :content_header do
+  %h1 Dashboard
 
 .row
   -# Skill tags
   .col-md-6
     - if ! @new_skills.blank?
-      .small-box.bg-aqua
+      .small-box.bg-orange
         .inner
           %h3= @new_skills.count
           %p
@@ -28,6 +27,9 @@
               = render partial: 'claim_tag', locals: {claim: claim}
           - else
             You have not added any skills yet
+      .box-footer.center
+        %a.center{ href: your_skills_path }
+          View
 
     .box.box-success
       .box-header.with-border
@@ -40,6 +42,9 @@
               = render partial: 'recommended_skill_tag', locals:{ user: current_user, skill: skill, user_skills: claimed_skills }
           - else
             You do not have any recommended skills
+      .box-footer.center
+        %a.center{ href: recommended_skills_path }
+          View
 
   -# Claims bar chart
   .col-md-6

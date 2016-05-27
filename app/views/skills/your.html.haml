@@ -1,0 +1,11 @@
+- content_for :content_header do
+  %h1
+    Your skills
+    %small all the skills you claim
+
+- if ! @skills.blank?
+  = render partial: 'skills_table', locals:{ skills: @skills }
+- else
+  %p
+    You have not added any skills,
+    = link_to 'add some now', skills_path

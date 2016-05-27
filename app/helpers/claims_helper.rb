@@ -32,10 +32,10 @@ module ClaimsHelper
       when :basic    then 'fa-star-o'
       when :good     then 'fa-star-half-empty'
       when :expert   then 'fa-star'
-      else 'fa-close'
+      else 'fa-circle-o'
       end
     else
-      'fa-close'
+      'fa-circle-o'
     end
   end
 
