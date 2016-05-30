@@ -30,9 +30,16 @@
       / Content Wrapper. Contains page content
       .content-wrapper
         / Content Header (Page header)
-        - if content_for? :content_header
-          %section.content-header
-            = yield :content_header
+
+        %section.content-header
+          %h1
+            - if content_for? :content_title
+              = yield :content_title
+              - if content_for? :content_subtitle
+                %small
+                  = yield :content_subtitle
+          %ol.breadcrumb
+            = render_breadcrumbs tag: :li, separator: ''
         / Main content
         %section.content
           - if alert

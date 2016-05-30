@@ -7,6 +7,7 @@ class SkillsController < ApplicationController
       page( params[:page] ).per 10
     @skills = add_search @skills
     authorize! :read, :skills
+    add_breadcrumb 'All skills', skills_path
   end
 
   def recommended
@@ -14,17 +15,21 @@ class SkillsController < ApplicationController
     @skills = add_search @skills
     @teams  = current_user.teams
     authorize! :read, :skills
+    add_breadcrumb 'Recommended skills', recommended_skills_path
   end
 
   def recent
     @skills = @new_skills.page( params[:page] ).per 10
     @skills = add_search @skills
+    add_breadcrumb 'Recent skills', recent_skills_path
   end
 
-  def your
+  def your_skills
     @skills = current_user.skills_claimed.page( params[:page] ).per 10
     @skills = add_search @skills
+    add_breadcrumb 'Your skills', your_skills_path
   end
+  alias_method :your, :your_skills
 
   private
 

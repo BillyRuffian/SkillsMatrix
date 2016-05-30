@@ -49,6 +49,7 @@ GEM
       tzinfo (~> 1.1)
     arel (7.0.0)
     bcrypt (3.1.11)
+    breadcrumbs_on_rails (2.3.1)
     builder (3.2.2)
     byebug (9.0.4)
     cancancan (1.14.0)
@@ -204,6 +205,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  breadcrumbs_on_rails
   byebug
   cancancan
   chart-js-rails

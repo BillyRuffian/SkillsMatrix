@@ -1,9 +1,14 @@
 class Admin::TeamSkillsController < ApplicationController
 
+  add_breadcrumb 'Teams', :admin_teams_path
+
   def index
     @team = Team.includes( :skills ).find( params[:team_id] )
     @skills = Skill.includes( :users ).order(:name).page(params[:page]).per(10)
     @skills = add_search @skills
+
+    add_breadcrumb @team.name, admin_team_path( @team )
+    add_breadcrumb 'Skills', admin_team_skills_path( @team )
   end
 
   def update

@@ -1,10 +1,10 @@
-- content_for :content_header do
-  %h1
-    Recommended skills
-    - unless @teams.blank?
-      %small
-        based on your team membership of
-        = @teams.map{ |t| t.name}.to_a.to_sentence
+- content_for :content_title do
+  Recommended skills
+
+- unless @teams.blank?
+  - content_for :content_subtitle do
+    based on your team membership of
+    = @teams.map{ |t| t.name}.sort.to_a.to_sentence
 
 - if ! @skills.blank?
   = render partial: 'skills_table', locals:{ skills: @skills }

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :check_for_new_skills
 
+  add_breadcrumb "<i class='fa fa-home'></i>".html_safe, :root_path
+
   def check_for_new_skills
     if user_signed_in?
       if ! current_user.first_sign_in?

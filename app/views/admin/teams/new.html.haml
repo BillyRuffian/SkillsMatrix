@@ -1,6 +1,6 @@
-- content_for :content_header do
-  %h1
-    New team
-    %small create a brand new team
+- content_for :content_title do
+  New team
+- content_for :content_subtitle do
+  create a brand new team
 
 = render partial: 'form'

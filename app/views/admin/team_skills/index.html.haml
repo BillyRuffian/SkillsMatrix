@@ -2,13 +2,12 @@
 /   user
 /   team
 
-- content_for :content_header do
-  %h1
-    Change skill requirments
-    %small
-      for the
-      = @team.name
-      team
+- content_for :content_title do
+  Change skill requirments
+- content_for :content_subtitle do
+  for the
+  = @team.name
+  team
 
 .row
   .col-md-12

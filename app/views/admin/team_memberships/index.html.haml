@@ -2,13 +2,12 @@
 /   user
 /   team
 
-- content_for :content_header do
-  %h1
-    Change team membership
-    %small
-      for the
-      = @team.name
-      team
+- content_for :content_title do
+  Change team membership
+- content_for :content_subtitle do
+  for the
+  = @team.name
+  team
 
 #modal.modal.modal-danger.fade{ tabindex: -1, role: :dialog }
 

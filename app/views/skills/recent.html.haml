@@ -1,7 +1,7 @@
-- content_for :content_header do
-  %h1
-    Recent skills
-    %small added since you last signed in
+- content_for :content_title do
+  Newly added skills
+- content_for :content_subtitle do
+  added since you last signed in
 
 - if ! @skills.blank?
   = render partial: 'skills_table', locals:{ skills: @skills }

@@ -1,5 +1,4 @@
-- content_for :content_header do
-  %h1
-    All skills
+- content_for :content_title do
+  All skills
 
 = render partial: 'skills_table', locals:{ skills: @skills }

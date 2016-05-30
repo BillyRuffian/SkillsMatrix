@@ -1,7 +1,7 @@
-- content_for :content_header do
-  %h1
-    Your skills
-    %small all the skills you claim
+- content_for :content_title do
+  Your skills
+- content_for :content_subtitle do
+  all the skills you claim
 
 - if ! @skills.blank?
   = render partial: 'skills_table', locals:{ skills: @skills }

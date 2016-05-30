@@ -1,8 +1,14 @@
 class Admin::TeamMembershipsController < ApplicationController
+
+  add_breadcrumb 'Teams', :admin_teams_path
+
   def index
     @team = Team.includes(:users).find( params[:team_id] )
     @users = User.includes( :teams ).order(:name).page(params[:page]).per(10)
     @users = add_search @users
+
+    add_breadcrumb @team.name, admin_team_path( @team )
+    add_breadcrumb 'Members', admin_team_users_path( @team )
   end
 
   def update

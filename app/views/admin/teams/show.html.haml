@@ -1,9 +1,7 @@
-- content_for :content_header do
-  %h1
-    = @team.name
-    .pull-right
-      = button_to 'Edit', edit_admin_team_path(@team), class: 'btn btn-xs btn-primary', form_class: 'form-inline', method: :get
-      = button_to 'Delete team', admin_team_path(@team), method: :delete, class: 'btn btn-xs btn-danger', form_class: 'form-inline', data: {confirm: "Are you sure you want to delete the '#{@team.name}' team?"}
+- content_for :content_title do
+  = @team.name
+  = button_to 'Edit', edit_admin_team_path(@team), class: 'btn btn-xs btn-primary', form_class: 'form-inline', method: :get
+  = button_to 'Delete team', admin_team_path(@team), method: :delete, class: 'btn btn-xs btn-danger', form_class: 'form-inline', data: {confirm: "Are you sure you want to delete the '#{@team.name}' team?"}
 
 .row
   .col-md-6
