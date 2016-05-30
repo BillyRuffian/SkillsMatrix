@@ -4,6 +4,7 @@
 .box.box-primary
   .box-header.with-border
     %h3.box-title Staff list
+    = render partial: 'shared/table_search'
   .box-body
     .box-body.table-response
       %table.table
@@ -15,3 +16,5 @@
             %th Teams
         %tbody
           = render @users
+    .box-footer
+      = paginate @users, window: 3

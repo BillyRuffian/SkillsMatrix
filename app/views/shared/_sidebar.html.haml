@@ -2,7 +2,7 @@
 %aside.main-sidebar
   / sidebar: style can be found in sidebar.less
   %section.sidebar
-    - if user_signed_in?
+    - if false #user_signed_in?
       .user-panel
         .pull-left.image
           = image_tag "https://robohash.org/#{current_user.email}.jpg?size=160x160&bgset=bg1", class: 'img-circle'

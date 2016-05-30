@@ -3,7 +3,7 @@ class Admin::TeamsController < ApplicationController
   add_breadcrumb 'Teams', :admin_teams_path
 
   def index
-    @teams = Team.all.order :name
+    @teams = Team.all.order( :name ).page(params[:page]).per(10)
     authorize! :read, Team
   end
 
