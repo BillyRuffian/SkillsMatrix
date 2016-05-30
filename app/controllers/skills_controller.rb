@@ -32,7 +32,7 @@ class SkillsController < ApplicationController
     if ! params[:search].blank?
       @search_term = params[:search]
       term = "%#{@search_term}%"
-      skills = @skills.where( 'name like ? OR description like ? OR context like ?', term, term, term )
+      skills = skills.where( 'name like ? OR description like ? OR context like ?', term, term, term )
     end
     skills
   end

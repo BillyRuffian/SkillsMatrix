@@ -1,0 +1,24 @@
+.modal-dialog{:role => "document"}
+  .modal-content
+    .modal-header
+      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} &#215;
+      %h4#myModalLabel.modal-title Reassign member
+    .modal-body
+      The member
+      = @user.name
+      is already assigned to the
+      = 'team'.pluralize @user.teams.count
+      = "#{@user.teams.to_a.map{ |t| t.name }.to_sentence}."
+      Would you like to add the member to the
+      = @team.name
+      team as well or would
+      you like to cancel all other team memberships and move to the
+      = @team.name
+      team?
+    .modal-footer
+      %button.btn.btn-outline.pull-left{"data-dismiss" => "modal", :type => "button"} Close
+      = link_to 'Add to team', admin_team_user_path( @team, @user, confirmation: :add ), method: :put, remote: true, 'data-dismiss' => 'modal', class: 'btn btn-outline'
+      = link_to 'Move to team', admin_team_user_path( @team, @user, confirmation: :move ), method: :put, remote: true, 'data-dismiss' => 'modal', class: 'btn btn-outline'
+      / %button.btn.btn-outline{:type => "button"} Add alongside current teams
+      / %button.btn.btn-outline{:type => "button"} Move to this team

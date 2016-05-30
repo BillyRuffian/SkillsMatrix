@@ -1,0 +1,25 @@
+%tr{ id: user.id }
+  %td= user.name
+  %td
+    - if ! team.skills.blank?
+      = render partial: 'shared/skill_match', locals: {user: user, skills: team.skills}
+    - else
+      &mdash;
+  %td
+    .btn-group.btn-fill
+      %a{class: "btn btn-sm btn-default dropdown-toggle btn-fill #{user.member_of?(team) ? 'bg-green' : nil}", 'data-toggle': 'dropdown'}
+        - if( user.member_of? team )
+          Assigned
+        - else
+          Unassigned
+        %span.caret
+      %ul.dropdown-menu.pull-right
+        %li.dropdown-header
+          = user.name
+        %li.divider{role: 'separator'}
+        - if( user.member_of? team )
+          %li
+            = link_to '<i class="fa fa-minus-square"></i>Remove from team'.html_safe, admin_team_user_path( team, user) , method: :delete, remote: true
+        - else
+          %li
+            = link_to '<i class="fa fa-plus-square"></i>Add to team'.html_safe, admin_team_user_path( team, user ), method: :put, remote: true

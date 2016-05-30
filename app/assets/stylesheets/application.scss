@@ -13,6 +13,7 @@
  *= require AdminLTE/bootstrap/css/bootstrap
  *= require AdminLTE
  *= require AdminLTE/dist/css/skins/skin-blue.css
+  *= require ionicons
  *= require_tree .
  *= require_self
  */
@@ -60,6 +61,7 @@ th.rotated{
 }
 
 .dropdown-menu {
-  background-color: #fcfcfc;
-  border-color: #e1e1e1;
+  background-color: #f0f0f0;
+  border-color: #999;
+  box-shadow: 7px 7px 5px #bbb;
 }

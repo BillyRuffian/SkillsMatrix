@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+
   namespace :admin do
-    resources :teams
+    resources :teams do
+      resources :users, controller: :team_memberships
+      resources :skills, controller: :team_skills
+    end
     resources :users
   end
 

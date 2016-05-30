@@ -17,6 +17,7 @@
 //  disabled turbolinks require turbolinks
 //= require AdminLTE/bootstrap/js/bootstrap
 //= require AdminLTE
+//= require jquery-slimscroll/jquery.slimscroll.min
 //= require_tree .
 //= require_self
 

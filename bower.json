@@ -14,6 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "AdminLTE": "admin-lte#^2.3.3"
+    "AdminLTE": "admin-lte#^2.3.3",
+    "jquery-slimscroll": "^1.3.7"
   }
 }

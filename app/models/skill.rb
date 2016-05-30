@@ -8,4 +8,8 @@ class Skill < ApplicationRecord
   scope :acquired, -> { joins(:claims).where( 'claims.level > 1' ) }
   scope :training, -> { joins(:claims).where( 'claims.level = 1' ) }
   scope :new_since, -> time { where( 'created_at > ? ', time ) }
+
+  def used_by? team
+    return teams.include? team
+  end
 end

@@ -1,0 +1,33 @@
+/ locals
+/   user
+/   team
+
+- content_for :content_header do
+  %h1
+    Change skill requirments
+    %small
+      for the
+      = @team.name
+      team
+
+.row
+  .col-md-12
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Skills
+        = render partial: 'shared/table_search'
+      .box-body.table-response
+        - if ! @skills.blank?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Skill
+                %th Description
+                %th Members
+            %tbody
+              - @skills.each do |skill|
+                = render partial: 'skill', locals: {skill: skill, team: @team}
+        - else
+          %p There don't seem to be any skills in the database
+      .box-footer
+        = paginate @skills, window: 3

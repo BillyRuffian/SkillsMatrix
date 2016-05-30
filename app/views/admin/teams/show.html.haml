@@ -11,6 +11,9 @@
     .box.box-primary
       .box-header.with-border
         %h3.box-title Members
+        .box-tools
+          %a{ href: admin_team_users_path(@team)}
+            %small Change members
       .box-body.table-response
         - if ! @users.blank?
           %table.table
@@ -23,16 +26,13 @@
             %tbody
               - @users.each do |user|
                 %tr
-                  %td= user.email
+                  %td= user.name
                   %td= Skill.for_user(user).acquired.count
                   %td
                     - if ! @skills.blank?
-                      - skill_match = (Skill.for_user(user).acquired & @skills).count
-                      = skill_match
-                      = '/'
-                      = number_to_percentage(skill_match.to_f / @skills.count.to_f * 100, precision: 2, strip_insignificant_zeros: true)
+                      = render partial: 'shared/skill_match', locals: {user: user, skills: @skills}
                     - else
-                      = '-'
+                      &mdash;
                   %td= Skill.for_user(user).training.count
         - else
           %p There are no members of this team
@@ -41,6 +41,9 @@
     .box.box-warning
       .box-header.with-border
         %h3.box-title Recommended skills
+        .box-tools
+          %a{ href: admin_team_skills_path(@team) }
+            %small Change skills
       .box-body.table-response
         - if ! @skills.blank?
           %table.table
@@ -53,7 +56,14 @@
               - @skills.each do |skill|
                 %tr
                   %td= skill.name
-                  %td= skill.claims.select{ |c| @users.include? c.user and not [:training, :nr].include? c.level }.count
+                  %td
+                    - skill_count = skill.claims.select{ |c| @users.include? c.user and not [:training, :nr].include? c.level }.count
+                    - if skill_count == 0
+                      %strong.text-danger= skill_count
+                    - elsif skill_count == 1
+                      %strong.text-warning= skill_count
+                    - else
+                      = skill_count
                   %td= skill.claims.select{ |c| @users.include? c.user and c.level == :training }.count
         - else
           %p There are no recommended skills for this team
@@ -66,7 +76,7 @@
 
       .box-body.table-response
         - if ! @skills.blank? && ! @users.blank?
-          %table.table.table-bordered
+          %table.table
             %thead
               %tr
                 %th Member
@@ -76,7 +86,7 @@
             %tbody
               - @users.each do |user|
                 %tr
-                  %td= user.email
+                  %td= user.name
                   - @skills.each do |skill|
                     %td
                       - claim = user.claims.for_skill( skill ).first

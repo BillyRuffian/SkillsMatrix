@@ -6,7 +6,7 @@ class Admin::TeamsController < ApplicationController
 
   def show
     @team = Team.find( params[:id] )
-    @users = @team.users.order :email
+    @users = @team.users.order :name
     @skills = @team.skills.order :name
     authorize! :read, @team
   end
@@ -40,6 +40,7 @@ class Admin::TeamsController < ApplicationController
     @team.update( team_params )
     redirect_to admin_teams_path
   end
+
 
   private
 

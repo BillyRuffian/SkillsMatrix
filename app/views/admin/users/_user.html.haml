@@ -1,5 +1,5 @@
 %tr
-  %td= user.email
+  %td= user.name
   %td= Skill.for_user(user).acquired.count
   %td= Skill.for_user(user).training.count
   %td= user.teams.order(:name).map{|t| t.name}.to_sentence

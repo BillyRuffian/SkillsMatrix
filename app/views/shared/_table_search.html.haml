@@ -1,0 +1,7 @@
+.box-tools
+  = form_tag nil, method: :get do
+    .input-group.input-group-sm{ style: 'width: 150px;'}
+      = text_field_tag :search, @search_term, class: 'form-control pull-right', placeholder: 'Search'
+      .input-group-btn
+        %button.btn.btn-default{:type => "submit"}
+          %i.fa.fa-search

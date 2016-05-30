@@ -1,0 +1,35 @@
+/ locals
+/   user
+/   team
+
+- content_for :content_header do
+  %h1
+    Change team membership
+    %small
+      for the
+      = @team.name
+      team
+
+#modal.modal.modal-danger.fade{ tabindex: -1, role: :dialog }
+
+.row
+  .col-md-12
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Members
+        = render partial: 'shared/table_search'
+      .box-body.table-response
+        - if ! @users.blank?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th User
+                %th Match
+                %th
+            %tbody
+              - @users.each do |user|
+                = render partial: 'member', locals: {user: user, team: @team}
+        - else
+          %p There don't seem to be any users in the database
+      .box-footer
+        = paginate @users, window: 3

@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def first_sign_in?
     current_sign_in_at == last_sign_in_at
   end
+
+  def member_of? team
+    teams.include? team
+  end
 end

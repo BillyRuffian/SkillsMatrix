@@ -5,9 +5,9 @@
     - if user_signed_in?
       .user-panel
         .pull-left.image
-          = image_tag 'person.png', class: 'img-circle'
+          = image_tag "https://robohash.org/#{current_user.email}.jpg?size=160x160&bgset=bg1", class: 'img-circle'
         .info.pull-left
-          %p= current_user.email
+          %p= current_user.name
           = link_to 'sign out', destroy_user_session_path, method: :delete
     / sidebar menu: : style can be found in sidebar.less
     %ul.sidebar-menu
