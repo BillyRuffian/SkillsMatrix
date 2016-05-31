@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :recommended_skills, through: :teams, source: :skills
   has_many :skills_claimed, -> {uniq}, through: :claims, source: :skill
 
+  validates_presence_of :name
+
   def first_sign_in?
     current_sign_in_at == last_sign_in_at
   end

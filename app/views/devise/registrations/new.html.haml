@@ -1,0 +1,28 @@
+%p.login-box-msg
+  Register as a new user
+
+  = session_error_messages!
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+
+  .form-group.has-feedback
+    = f.text_field :name, autofocus: true, placeholder: 'Full name', class: 'form-control'
+    %span.glyphicon.glyphicon-user.form-control-feedback
+
+  .form-group.has-feedback
+    = f.email_field :email, placeholder: 'Email', class: 'form-control'
+    %span.glyphicon.glyphicon-envelope.form-control-feedback
+
+  .form-group.has-feedback
+    = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'form-control'
+    %span.glyphicon.glyphicon-lock.form-control-feedback
+
+  .form-group.has-feedback
+    = f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'Confirm password', class: 'form-control'
+    %span.glyphicon.glyphicon-log-in.form-control-feedback
+
+  .row
+    .col-xs-offset-8.col-xs-4
+      %button.btn.btn-primary.btn-block.btn-flat{:type => "submit"} Register
+
+= render "devise/shared/links"

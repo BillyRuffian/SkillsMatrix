@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title Skills Matrix | Log in
+    / Tell the browser to be responsive to screen width
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body.hold-transition.login-page
+
+    .login-box
+      .login-logo
+        %a{ href: root_path }
+          %b> Skills
+          Matrix
+      / /.login-logo
+      .login-box-body
+        - if alert
+          .callout.callout-danger
+            %h4 Oops
+            %p= alert
+        - if notice
+          .callout.callout-info
+            %h4 Information
+            %p= notice
+        = yield
+      / /.login-box-body
+    / /.login-box
+
+    :javascript
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });

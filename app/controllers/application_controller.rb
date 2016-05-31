@@ -7,11 +7,23 @@ class ApplicationController < ActionController::Base
 
   add_breadcrumb "<i class='fa fa-home'></i>".html_safe, :root_path
 
+  layout :layout_for_resource
+
   def check_for_new_skills
     if user_signed_in?
       if ! current_user.first_sign_in?
         @new_skills = Skill.new_since( current_user.last_sign_in_at ).order( :name )
       end
+    end
+  end
+
+  protected
+
+  def layout_for_resource
+    if devise_controller? && !( controller_name = 'registrations' && ( action_name == 'edit' || action_name == 'update') )
+      "session"
+    else
+      "application"
     end
   end
 end
