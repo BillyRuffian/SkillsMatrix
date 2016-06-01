@@ -17,35 +17,35 @@
             .input-group
               = f.text_field :name, autofocus: true, placeholder: 'Full name', class: 'form-control'
               %span.input-group-addon
-                %i.glyphicon.glyphicon-user
+                %i.fa.fa-user
 
           .form-group
             = f.label :email, 'Email'
             .input-group
               = f.email_field :email, placeholder: 'Email', class: 'form-control'
               %span.input-group-addon
-                %i.glyphicon.glyphicon-envelope
+                %i.fa.fa-envelope
 
           .form-group
             = f.label :password, 'New password'
             .input-group
               = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'form-control'
               %span.input-group-addon
-                %i.glyphicon.glyphicon-lock
+                %i.fa.fa-lock
 
           .form-group
             = f.label :password_confirmation, 'New password confirmation'
             .input-group
               = f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'Password confirmation', class: 'form-control'
               %span.input-group-addon
-                %i.glyphicon.glyphicon-lock
+                %i.fa.fa-lock
 
           .form-group
             = f.label :current_password, 'Current password'
             .input-group
               = f.password_field :current_password, autocomplete: 'off', placeholder: 'Password confirmation', class: 'form-control'
               %span.input-group-addon
-                %i.glyphicon.glyphicon-log-in
+                %i.fa.fa-sign-in
             .help-block Your current password is needed to confirm changes
 
         .box-footer
