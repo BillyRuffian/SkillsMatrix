@@ -2,7 +2,10 @@
 /   user: the user to test
 /   skills: the set of skills to test against
 
-- skill_match = (Skill.for_user(user).acquired & skills).count
-= skill_match
-= '/'
-= number_to_percentage(skill_match.to_f / skills.count.to_f * 100, precision: 2, strip_insignificant_zeros: true)
+- if ! skills.blank?
+  - skill_match = (Skill.for_user(user).acquired & skills).count
+  = skill_match
+  = '/'
+  = number_to_percentage(skill_match.to_f / skills.count.to_f * 100, precision: 2, strip_insignificant_zeros: true)
+- else
+  %mdash;

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :skills, controller: :team_skills
     end
     resources :users
+    resources :skills
   end
 
   resources :skills do

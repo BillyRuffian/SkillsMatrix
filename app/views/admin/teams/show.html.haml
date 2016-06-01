@@ -24,7 +24,7 @@
             %tbody
               - @users.each do |user|
                 %tr
-                  %td= user.name
+                  %td= link_to user.name, admin_user_path( user )
                   %td= Skill.for_user(user).acquired.count
                   %td
                     - if ! @skills.blank?
@@ -94,9 +94,6 @@
           .box-footer
             .pull-right.text-muted
               Key:
-              %span.label.label-default.label-inline
-                %i.fa.fa-circle-o
-                No skill
               %span.label.label-default.label-inline
                 %i.fa.fa-graduation-cap
                 Training needed

@@ -55,4 +55,4 @@
         .chart
           %canvas#claims-bar-chart{ style: 'height: 230px; width: 530px;' }
 
-= render partial: 'claims-bar-chart', formats: [:js], locals: {claims: @claims}
+= render partial: 'shared/claims-bar-chart', formats: [:js], locals: {claims: @claims}

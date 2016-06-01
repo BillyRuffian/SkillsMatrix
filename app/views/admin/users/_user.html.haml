@@ -1,5 +1,5 @@
 %tr
-  %td= user.name
+  %td= link_to user.name, admin_user_path(user)
   %td= Skill.for_user(user).acquired.count
   %td= Skill.for_user(user).training.count
   %td= user.teams.order(:name).map{|t| t.name}.to_sentence
