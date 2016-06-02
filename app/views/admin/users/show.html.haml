@@ -4,37 +4,6 @@
 .row
   / Teams
   .col-md-6
-    .box.box-warning
-      .box-header.with-border
-        %h4.box-title
-          Teams
-      .box-body.table-response
-        - if ! @teams.blank?
-          %table.table
-            %thead
-              %tr
-                %th Team
-                %th Match
-            %tbody
-              - @teams.each do |team|
-                %tr
-                  %td= link_to team.name, admin_team_path( team )
-                  %td= render partial: 'shared/skill_match', locals: {user: @user, skills: team.skills}
-        - else
-          %p
-            = @user.name
-            is not assigned to any teams.
-    / Claims bar chart
-    .box.box-primary
-      .box-header.with-border
-        %h3.box-title Expertise breakdown
-      .box-body
-        .chart
-          %canvas#claims-bar-chart{ style: 'height: 230px; width: 530px;' }
-          / render claims JS at foot of page
-
-  / Skills
-  .col-md-6
     .box.box-success
       .box-header.with-border
         %h4.box-title
@@ -55,5 +24,37 @@
           %p
             = @user.name
             has not claimed any skills.
+
+    .box.box-warning
+      .box-header.with-border
+        %h4.box-title
+          Teams
+      .box-body.table-response
+        - if ! @teams.blank?
+          %table.table
+            %thead
+              %tr
+                %th Team
+                %th Match
+            %tbody
+              - @teams.each do |team|
+                %tr
+                  %td= link_to team.name, admin_team_path( team )
+                  %td= render partial: 'shared/skill_match', locals: {user: @user, skills: team.skills}
+        - else
+          %p
+            = @user.name
+            is not assigned to any teams.
+
+  / Skills
+  .col-md-6
+    / Claims bar chart
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Expertise breakdown
+      .box-body
+        .chart
+          %canvas#claims-bar-chart{ style: 'height: 230px; width: 530px;' }
+          / render claims JS at foot of page
 
 = render partial: 'shared/claims-bar-chart', formats: [:js], locals: {claims: @claims}

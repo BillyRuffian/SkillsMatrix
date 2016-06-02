@@ -1,0 +1,83 @@
+= content_for :content_title do
+  .dropdown
+    .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+      = @skill.name
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a{ href: edit_admin_skill_path(@skill) }
+          %i.fa.fa-pencil-square
+          Edit
+      %li
+        = link_to admin_skill_path(@skill), method: :delete, data: {confirm: "Are you sure you want to delete the '#{@skill.name}' skill?"} do
+          %i.fa.fa-trash
+          Delete
+
+.row
+  .col-md-6
+    .box.box-success
+      .box-header.with-border
+        %h3.box-title Staff with skill
+      .box-body.table-response
+        - if ! @users_with_skill.blank?
+          %table.table
+            %thead
+              %tr
+                %th Name
+                %th Level
+            %tbody
+              - @users_with_skill.each do |user|
+                %tr
+                  %td= link_to user.name, admin_user_path( user )
+                  %td= user.claims.where( 'claims.skill_id = ? ', @skill.id ).first.level.to_s.humanize
+        - else
+          %p There are no staff with this skill.
+
+    .box.box-danger
+      .box-header.with-border
+        %h3.box-title Staff with training need
+      .box-body.table-response
+        - if ! @users_with_training_need.blank?
+          %table.table
+            %thead
+              %tr
+                %th Name
+            %tbody
+              - @users_needing_training.each do |user|
+                %tr
+                  %td= link_to user.name, admin_user_path( user )
+        - else
+          %p
+            There are no users needing
+            = @skill.name
+            training.
+
+    .box.box-warning
+      .box-header.with-border
+        %h3.box-title Teams using this skill
+      .box-body.table-response
+        - if ! @teams.blank?
+          %table.table
+            %thead
+              %tr
+                %th Name
+            %tbody
+              - @teams.each do |team|
+                %tr
+                  %td= link_to team.name, admin_team_path( team )
+        - else
+          %p
+            There are no teams needing
+            = @skill.name
+            skills.
+
+  .col-md-6
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Expertise breakdown
+      .box-body
+        .chart
+          %canvas#claims-bar-chart{ style: 'height: 230px; width: 530px;' }
+          / render claims JS at foot of page
+
+= render partial: 'shared/claims-bar-chart', formats: [:js], locals: {claims: @skill.claims}

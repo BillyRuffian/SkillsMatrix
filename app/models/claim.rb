@@ -5,6 +5,9 @@ class Claim < ApplicationRecord
   scope :for_skill, -> skill { where( skill_id: skill.id ) }
   scope :for_user,  -> user  { where( user_id:  user.id  ) }
 
+  scope :acquired, -> { where( "level > 1" ) }
+  scope :training, -> { where( "level = 1" ) }
+
   LEVELS = %i{
     nr
     training

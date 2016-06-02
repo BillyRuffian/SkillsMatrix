@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def active_menu key
-    'active' if controller_name.to_sym == key.to_sym
+    'active' if controller_path.to_sym == key.to_sym
   end
 
   def session_error_messages!

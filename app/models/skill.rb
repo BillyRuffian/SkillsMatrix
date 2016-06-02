@@ -4,6 +4,8 @@ class Skill < ApplicationRecord
 
   has_and_belongs_to_many :teams
 
+  validates_uniqueness_of :name
+
   scope :for_user, -> user { joins(:claims).where( 'claims.user_id = ?', user.id) }
   scope :acquired, -> { joins(:claims).where( 'claims.level > 1' ) }
   scope :training, -> { joins(:claims).where( 'claims.level = 1' ) }

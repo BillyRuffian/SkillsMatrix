@@ -1,26 +1,29 @@
-- content_for :content_title do
+= content_for :content_title do
   .dropdown
     .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-      Teams
+      Skills
       %span.caret
     %ul.dropdown-menu
       %li
-        %a{ href: new_admin_team_path }
+        %a{ href: new_admin_skill_path}
           %i.fa.fa-plus-square
-          New Team
+          New Skill
 
 .box.box-primary
   .box-header.with-border
-    %h3.box-title Teams
+    %h3.box-title Skills
+    .box-tools
+      = render partial: 'shared/table_search'
   .box-body
     .box-body.table-response
       %table.table
         %thead
           %tr
             %th Name
-            %th Members
-            %th Skills
+            %th Description
+            %th With skill
+            %th Need training
         %tbody
-          = render @teams
+          = render @skills
     .box-footer
-      = paginate @teams, window: 3
+      = paginate @skills, window: 3

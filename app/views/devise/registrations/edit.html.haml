@@ -2,7 +2,16 @@
   = current_user.name
 
 .row
-  .col-md-12
+  .col-md-3
+    .box.box-primary
+      .box-body.box-profile
+        = image_tag "https://robohash.org/#{current_user.email}.jpg?size=160x160&bgset=bg1", class: 'profile-user-img img-responsive img-circle'
+        %h3.profile-username.text-center
+          = current_user.name
+        %p.text-muted.text-center
+          = current_user.teams.to_a.map{ |t| t.name }.to_sentence unless current_user.teams.blank?
+
+  .col-md-9
     = session_error_messages!
 
     .box.box-warning
