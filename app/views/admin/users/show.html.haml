@@ -1,5 +1,17 @@
 = content_for :content_title do
-  = @user.name
+  .dropdown
+    .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+      = @user.name
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a{ href: edit_admin_user_path(@user) }
+          %i.fa.fa-pencil-square
+          Edit
+      %li
+        = link_to admin_user_path(@user), method: :delete, data: {confirm: "Are you sure you want to delete member of staff '#{@user.name}'?"} do
+          %i.fa.fa-trash
+          Delete
 
 .row
   / Teams

@@ -1,11 +1,14 @@
-= form_for [:admin, @team] do |f|
+= form_for [:admin, @user] do |f|
   .box.box-primary
     .box-header.with-border
-      %h3.box-title Team
+      %h3.box-title User
     .box-body
       .form-group
-        = f.label :name, 'Team name'
+        = f.label :name, 'Name'
         = f.text_field :name, class: 'form-control', autofocus: true
+      .form-group
+        = f.label :email, 'Email'
+        = f.text_field :email, class: 'form-control'
     .box-footer
       = link_to 'Cancel', url_for( :back )
       = f.submit 'Save', class: 'btn btn-primary pull-right'

@@ -16,7 +16,35 @@ class Admin::UsersController < ApplicationController
     authorize! :read, User
   end
 
+  def edit
+    @user = User.find params[:id]
+    add_breadcrumb @user.name, admin_user_path( @user )
+    add_breadcrumb 'Edit', edit_admin_user_path( @user )
+    authorize! :edit, @user
+  end
+
+  def update
+    @user = User.find params[:id]
+    authorize! :edit, @user
+    @user.update_attributes user_params
+    @user.save
+    flash.notice = "#{@user.name} has been updated"
+    redirect_to admin_user_path( @user )
+  end
+
+  def destroy
+    @user = User.find params[:id]
+    authorize! :destroy, @user
+    @user.destroy
+    flash.notice = "#{@user.name} has been deleted"
+    redirect_to admin_users_path
+  end
+
   private
+
+  def user_params
+    params.require( :user ).permit( :name, :email, :password, :password_confirmation )
+  end
 
   def add_search users
     if ! params[:search].blank?

@@ -1,0 +1,15 @@
+= content_for :content_title do
+  Edit
+  = @user.name
+
+- if @user == current_user
+  .alert.alert-warning
+    %h4
+      %i.fa.fa-warning
+      Warning
+    %p
+      You are editing your own profile. For best results, use your
+      = succeed '.' do
+        = link_to 'profile page', edit_registration_path( @user )
+
+= render partial: 'form'
