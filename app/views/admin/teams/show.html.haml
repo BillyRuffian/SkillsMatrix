@@ -20,7 +20,10 @@
       .box-header.with-border
         %h3.box-title Team leader
       .box-body
-        %p= link_to @team.leader.name, admin_user_path( @team.leader )
+        - if @team.leader
+          %p= link_to @team.leader.name, admin_user_path( @team.leader )
+        - else
+          %p No team leader assigned
 
     .box.box-primary
       .box-header.with-border
