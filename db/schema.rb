@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528172942) do
+ActiveRecord::Schema.define(version: 20160603150235) do
 
   create_table "claims", force: :cascade do |t|
     t.integer  "level"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20160528172942) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "leader_id"
+    t.index ["leader_id"], name: "index_teams_on_leader_id"
     t.index ["name"], name: "index_teams_on_name"
   end
 
