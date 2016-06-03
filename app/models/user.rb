@@ -20,4 +20,12 @@ class User < ApplicationRecord
   def member_of? team
     teams.include? team
   end
+
+  def team_leader?
+    ! leads.empty?
+  end
+
+  def team_leader_of? team
+    leads.includes? team
+  end
 end

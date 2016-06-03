@@ -16,7 +16,7 @@
         .checkbox
           - if devise_mapping.rememberable?
             %label
-              %input{:type => "checkbox"}/
+              = f.check_box :remember_me
               Remember Me
     .col-xs-4
       %button.btn.btn-primary.btn-block.btn-flat{:type => "submit"} Sign In
