@@ -1,4 +1,4 @@
-= content_for :content_title do
+- content_for :content_title do
   .dropdown
     .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
       = @skill.name
@@ -12,6 +12,12 @@
         = link_to admin_skill_path(@skill), method: :delete, data: {confirm: "Are you sure you want to delete the '#{@skill.name}' skill?"} do
           %i.fa.fa-trash
           Delete
+
+- if ! @skill.context.blank?
+  - content_for :content_subtitle do
+    = @skill.context
+
+%p= @skill.description if ! @skill.description.blank?
 
 .row
   .col-md-6

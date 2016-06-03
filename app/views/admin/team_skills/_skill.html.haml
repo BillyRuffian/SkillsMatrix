@@ -1,6 +1,7 @@
 %tr{ id: skill.id }
   %td= skill.name
-  %td= skill.description
+  %td
+    %small.text-muted= skill.description
   %td= skill.users.count
   %td
     .btn-group.btn-fill

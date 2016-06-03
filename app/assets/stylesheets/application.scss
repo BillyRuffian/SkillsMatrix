@@ -78,6 +78,9 @@ th.rotated{
 .clearable::-ms-clear {display: none; width:0; height:0;} /* Remove IE default X */
 
 h1{
+  .dropdown {
+    display: inline-block;
+  }
   .dropdown-toggle {
     text-decoration: underline;
     text-decoration-style: dotted;

@@ -27,7 +27,6 @@ class Admin::UsersController < ApplicationController
     @user = User.find params[:id]
     authorize! :edit, @user
     @user.update_attributes user_params
-    @user.save
     flash.notice = "#{@user.name} has been updated"
     redirect_to admin_user_path( @user )
   end

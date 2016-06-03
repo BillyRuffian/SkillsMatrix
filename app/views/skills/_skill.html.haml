@@ -3,6 +3,7 @@
   %td= skill.name
   %td= skill.context
   %td
+    %small.text-muted= skill.description
   %td
     - if( claim and can? :update, claim ) or ( claim.blank? and can? :create, Claim )
       .btn-group.btn-fill
