@@ -6,6 +6,9 @@
       .form-group
         = f.label :name, 'Team name'
         = f.text_field :name, class: 'form-control', autofocus: true
+      .form-group
+        = f.label :name, 'Leader'
+        = f.select :leader_id, @users.collect {|u| [ u.name, u.id ] }, { include_blank: true }, {class: 'form-control'}
     .box-footer
       = link_to 'Cancel', url_for( :back )
       = f.submit 'Save', class: 'btn btn-primary pull-right'

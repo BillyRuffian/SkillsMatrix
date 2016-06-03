@@ -36,6 +36,7 @@ class Admin::TeamsController < ApplicationController
 
   def edit
     @team = Team.find( params[:id] )
+    @users = User.select( :id, :name ).order :name
     add_breadcrumb @team.name, admin_team_path( @team )
     add_breadcrumb 'Edit', edit_admin_team_path( @team )
     authorize! :edit, @team
@@ -52,7 +53,7 @@ class Admin::TeamsController < ApplicationController
   private
 
   def team_params
-    params.require( :team ).permit( :name )
+    params.require( :team ).permit( :name, :leader_id )
   end
 
 end
