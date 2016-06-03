@@ -35,6 +35,7 @@ gem 'cancancan'
 gem 'devise'
 gem "kaminari", github: "amatsuda/kaminari"
 gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
 gem 'breadcrumbs_on_rails'
 gem 'font-awesome-sass', '~> 4.6.2'
 source 'https://rails-assets.org' do

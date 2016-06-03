@@ -148,6 +148,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-jquery-autocomplete (1.0.3)
+      rails (>= 3.2)
     railties (5.0.0.rc1)
       actionpack (= 5.0.0.rc1)
       activesupport (= 5.0.0.rc1)
@@ -224,6 +226,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (>= 5.0.0.rc1, < 5.1)
   rails-assets-ionicons!
+  rails-jquery-autocomplete
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)

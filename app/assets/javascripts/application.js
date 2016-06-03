@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/effect
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
 //= require Chart
 //  disabled turbolinks require turbolinks
 //= require AdminLTE/bootstrap/js/bootstrap

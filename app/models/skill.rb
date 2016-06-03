@@ -11,6 +11,9 @@ class Skill < ApplicationRecord
   scope :training, -> { joins(:claims).where( 'claims.level = 1' ) }
   scope :new_since, -> time { where( 'created_at > ? ', time ) }
 
+  # for autocomplete
+  scope :unique_types, -> { group( :context ) }
+
   def used_by? team
     return teams.include? team
   end

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       resources :skills, controller: :team_skills
     end
     resources :users
-    resources :skills
+    resources :skills do
+      get :autocomplete_skill_context, :on => :collection
+    end
   end
 
   resources :skills do

@@ -8,7 +8,8 @@
         = f.text_field :name, class: 'form-control', autofocus: true
       .form-group
         = f.label :context, 'Skill type'
-        = f.text_field :context, class: 'form-control', placeholder: 'e.g. Language, Framework, Business'
+        /= f.text_field :context, class: 'form-control', placeholder: 'e.g. Language, Framework, Business'
+        = f.autocomplete_field :context, autocomplete_skill_context_admin_skills_path, class: 'form-control', placeholder: 'e.g. Language, Framework, Business', 'data-auto-focus' => true
       .form-group
         = f.label :description, 'Short description'
         = f.text_field :description, class: 'form-control'

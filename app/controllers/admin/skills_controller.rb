@@ -1,5 +1,7 @@
 class Admin::SkillsController < ApplicationController
 
+  autocomplete :skill, :context, scopes: [:unique_types]
+
   add_breadcrumb 'Skills', :admin_skills_path
 
   def index
