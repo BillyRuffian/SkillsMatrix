@@ -1,17 +1,22 @@
 - content_for :content_title do
-  .dropdown
-    .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-      = @user.name
-      %span.caret
-    %ul.dropdown-menu
-      %li
-        %a{ href: edit_admin_user_path(@user) }
-          %i.fa.fa-pencil-square
-          Edit
-      %li
-        = link_to admin_user_path(@user), method: :delete, data: {confirm: "Are you sure you want to delete member of staff '#{@user.name}'?"} do
-          %i.fa.fa-trash
-          Delete
+  - if can?( :edit, @user ) || can?( :destroy, @user )
+    .dropdown
+      .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        = @user.name
+        %span.caret
+      %ul.dropdown-menu
+        - if can? :edit, @user
+          %li
+            %a{ href: edit_admin_user_path(@user) }
+              %i.fa.fa-pencil-square
+              Edit
+        %li
+          - if can? :destroy, @user
+            = link_to admin_user_path(@user), method: :delete, data: {confirm: "Are you sure you want to delete member of staff '#{@user.name}'?"} do
+              %i.fa.fa-trash
+              Delete
+  - else
+    = @user.name
 
 .row
   / Teams
@@ -73,7 +78,11 @@
             %tbody
               - @teams.each do |team|
                 %tr
-                  %td= link_to team.name, admin_team_path( team )
+                  %td
+                    - if can? :read, team
+                      = link_to team.name, admin_team_path( team )
+                    - else
+                      = team.name
                   %td= render partial: 'shared/skill_match', locals: {user: @user, skills: team.skills}
         - else
           %p

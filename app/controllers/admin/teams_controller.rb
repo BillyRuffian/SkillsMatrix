@@ -17,11 +17,13 @@ class Admin::TeamsController < ApplicationController
 
   def new
     add_breadcrumb 'New', :new_admin_team_path
+    @users = User.select( :id, :name ).order :name
     @team = Team.new
   end
 
   def create
     @team = Team.new( team_params )
+    @users = User.select( :id, :name ).order :name
     @team.save
     redirect_to admin_teams_path
     authorize! :create, Team
@@ -44,6 +46,7 @@ class Admin::TeamsController < ApplicationController
 
   def update
     @team = Team.find( params[:id] )
+    @users = User.select( :id, :name ).order :name
     authorize! :edit, @team
     @team.update( team_params )
     redirect_to admin_teams_path

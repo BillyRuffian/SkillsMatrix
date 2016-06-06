@@ -9,11 +9,17 @@ class Admin::TeamMembershipsController < ApplicationController
 
     add_breadcrumb @team.name, admin_team_path( @team )
     add_breadcrumb 'Members', admin_team_users_path( @team )
+
+    authorize! :reader, User
   end
 
   def update
     @team = Team.find params[:team_id]
     @user = User.find params[:id]
+
+    authorize! :read, @team
+    authorize! :assign, @user
+
     if ! @user.teams.blank? && ( @user.teams - [@team]).count >= 1
       if !params[:confirmation].blank? && [:add, :move].include?(params[:confirmation].to_sym)
         if params[:confirmation].to_sym == :add
@@ -34,6 +40,10 @@ class Admin::TeamMembershipsController < ApplicationController
   def destroy
     @team = Team.find params[:team_id]
     @user = User.find params[:id]
+
+    authorize! :read, @team
+    authorize! :assign, @user
+
     @team.users.delete( @user )
     @user.reload
     render 'update_membership'

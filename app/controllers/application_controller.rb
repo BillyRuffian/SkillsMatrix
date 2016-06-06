@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :check_for_new_skills
+  before_action :get_team_names
 
   add_breadcrumb "<i class='fa fa-home'></i>".html_safe, :root_path
 
@@ -15,6 +16,10 @@ class ApplicationController < ActionController::Base
         @new_skills = Skill.new_since( current_user.last_sign_in_at ).order( :name )
       end
     end
+  end
+
+  def get_team_names
+    @team_names = Team.order( :name )
   end
 
   protected

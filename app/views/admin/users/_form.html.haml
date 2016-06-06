@@ -9,6 +9,11 @@
       .form-group
         = f.label :email, 'Email'
         = f.text_field :email, class: 'form-control'
+      .form-group
+        .checkbox
+          = f.label :admin do
+            = f.check_box :admin
+            Administrator priviledges
     .box-footer
       = link_to 'Cancel', url_for( :back )
       = f.submit 'Save', class: 'btn btn-primary pull-right'

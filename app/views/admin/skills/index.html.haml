@@ -1,13 +1,16 @@
 - content_for :content_title do
-  .dropdown
-    .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-      Skills
-      %span.caret
-    %ul.dropdown-menu
-      %li
-        %a{ href: new_admin_skill_path}
-          %i.fa.fa-plus-square
-          New Skill
+  - if can? :create, Skill
+    .dropdown
+      .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Skills
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a{ href: new_admin_skill_path}
+            %i.fa.fa-plus-square
+            New Skill
+  - else
+    Skills
 
 .box.box-primary
   .box-header.with-border

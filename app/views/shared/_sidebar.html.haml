@@ -17,6 +17,7 @@
         %a{:href => root_path }
           %i.fa.fa-dashboard
           %span Dashboard
+
       - if can? :read, Skill
         %li.treeview{ class: active_menu(:skills) }
           %a{href:'#'}
@@ -26,25 +27,26 @@
           %ul.treeview-menu
             %li
               %a{:href => skills_path }
-                %i.fa.fa-circle-o
+                %i.fa.fa-circle-o.text-aqua
                 %span All skills
             %li
               %a{:href => your_skills_path }
-                %i.fa.fa-circle-o
+                %i.fa.fa-circle-o.text-green
                 %span Your skills
             %li
               %a{:href => recommended_skills_path }
-                %i.fa.fa-circle-o
+                %i.fa.fa-circle-o.text-yellow
                 %span Recommended skills
-            %li
-              %a{:href => recent_skills_path }
-                %i.fa.fa-circle-o
-                %span Newly added
-                - if !@new_skills.blank? && @new_skills.count > 0
-                  %span.label.label-primary.pull-right= @new_skills.count
+            - if ! @new_skills.blank? && @new_skills.count > 0
+              %li
+                %a{:href => recent_skills_path }
+                  %i.fa.fa-circle-o.text-red
+                  %span Newly added
+                  - if !@new_skills.blank? && @new_skills.count > 0
+                    %span.label.label-primary.pull-right= @new_skills.count
 
       / Admin menu
-      - if user_signed_in? && current_user.admin?
+      - if user_signed_in? && (current_user.admin? || current_user.team_leader? )
         %li.header ADMINISTRATION
         - if can? :read, User
           %li
@@ -53,10 +55,22 @@
               %span Staff
 
         - if can? :read, Team
-          %li
-            %a{href: admin_teams_path}
+          %li.treeview{ class: active_menu(:skills) }
+            %a{href:'#'}
               %i.fa.fa-users
-              %span Teams
+              Teams
+              %i.fa.fa-angle-left.pull-right
+            %ul.treeview-menu
+              %li
+                %a{href: admin_teams_path}
+                  %i.fa.fa-circle-o.text-aqua
+                  %span All teams
+              - @team_names.each do |team|
+                - if can? :read, team
+                  %li
+                    %a{:href => admin_team_path(team) }
+                      %i.fa.fa-circle-o.text-yellow
+                      %span= team.name
 
         - if can? :read, Skill
           %li

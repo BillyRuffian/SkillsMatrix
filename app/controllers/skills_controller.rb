@@ -6,7 +6,7 @@ class SkillsController < ApplicationController
       order( :name ).
       page( params[:page] ).per 10
     @skills = add_search @skills
-    authorize! :read, :skills
+    authorize! :read, Skill
     add_breadcrumb 'All skills', skills_path
   end
 
@@ -14,7 +14,7 @@ class SkillsController < ApplicationController
     @skills = current_user.recommended_skills.order(:name).page( params[:page] ).per 10
     @skills = add_search @skills
     @teams  = current_user.teams
-    authorize! :read, :skills
+    authorize! :read, Skill
     add_breadcrumb 'Recommended skills', recommended_skills_path
   end
 
@@ -22,11 +22,13 @@ class SkillsController < ApplicationController
     @skills = @new_skills.page( params[:page] ).per 10
     @skills = add_search @skills
     add_breadcrumb 'Recent skills', recent_skills_path
+    authorize! :read, Skill
   end
 
   def your_skills
     @skills = current_user.skills_claimed.page( params[:page] ).per 10
     @skills = add_search @skills
+    authorize! :read, Skill
     add_breadcrumb 'Your skills', your_skills_path
   end
   alias_method :your, :your_skills

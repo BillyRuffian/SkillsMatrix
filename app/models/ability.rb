@@ -6,11 +6,24 @@ class Ability
 
     if user.admin?
       can :manage, :all
-    else
-      can :read, :all
-      can :create, Claim
-      can [:update, :delete], Claim, user_id: user.id
     end
+
+    if user.team_leader?
+      can :read, Team, leader_id: user.id
+
+      can :read, Skill
+      can :recommend, Skill
+
+      can :read, User do |staff|
+        ! (staff.teams & user.leads).blank?
+      end
+      can :read, User, id: user.id
+    end
+
+    can :read, User, id: user.id
+    can :read, Skill
+    can :create, Claim
+    can [:read, :update, :delete], Claim, user_id: user.id
 
     # Define abilities for the passed in user here. For example:
     #

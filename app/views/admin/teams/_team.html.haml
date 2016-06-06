@@ -3,9 +3,12 @@
     - if can? :read, team
       = link_to( team.name, admin_team_path( team ) )
     - else
-      team.name
+      = team.name
   %td
     - if team.leader
-      = link_to team.leader.name, admin_user_path( team.leader )
+      - if can? :read, team.leader
+        = link_to team.leader.name, admin_user_path( team.leader )
+      - else
+        = team.leader.name
   %td= team.users.count
   %td= team.skills.count

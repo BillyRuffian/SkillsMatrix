@@ -1,17 +1,22 @@
 - content_for :content_title do
-  .dropdown
-    .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-      = @skill.name
-      %span.caret
-    %ul.dropdown-menu
-      %li
-        %a{ href: edit_admin_skill_path(@skill) }
-          %i.fa.fa-pencil-square
-          Edit
-      %li
-        = link_to admin_skill_path(@skill), method: :delete, data: {confirm: "Are you sure you want to delete the '#{@skill.name}' skill?"} do
-          %i.fa.fa-trash
-          Delete
+  - if can?( :edit, @skill ) || can?( :destroy, @skill )
+    .dropdown
+      .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        = @skill.name
+        %span.caret
+      %ul.dropdown-menu
+        - if can? :edit, @skill
+          %li
+            %a{ href: edit_admin_skill_path(@skill) }
+              %i.fa.fa-pencil-square
+              Edit
+        - if can? :destroy, @skill
+          %li
+            = link_to admin_skill_path(@skill), method: :delete, data: {confirm: "Are you sure you want to delete the '#{@skill.name}' skill?"} do
+              %i.fa.fa-trash
+              Delete
+  - else
+    = @skill.name
 
 - if ! @skill.context.blank?
   - content_for :content_subtitle do
@@ -34,7 +39,11 @@
             %tbody
               - @users_with_skill.each do |user|
                 %tr
-                  %td= link_to user.name, admin_user_path( user )
+                  %td
+                    - if can? :read, user
+                      = link_to user.name, admin_user_path( user )
+                    - else
+                      = user.name
                   %td= user.claims.where( 'claims.skill_id = ? ', @skill.id ).first.level.to_s.humanize
         - else
           %p There are no staff with this skill.
@@ -51,7 +60,11 @@
             %tbody
               - @users_needing_training.each do |user|
                 %tr
-                  %td= link_to user.name, admin_user_path( user )
+                  %td
+                    - if can? :read, user
+                      = link_to user.name, admin_user_path( user )
+                    - else
+                      = user.name
         - else
           %p
             There are no users needing
@@ -70,7 +83,11 @@
             %tbody
               - @teams.each do |team|
                 %tr
-                  %td= link_to team.name, admin_team_path( team )
+                  %td
+                    - if can? :read, team
+                      = link_to team.name, admin_team_path( team )
+                    - else
+                      = team.name
         - else
           %p
             There are no teams needing

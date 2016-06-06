@@ -7,12 +7,16 @@ class Admin::TeamSkillsController < ApplicationController
     @skills = Skill.includes( :users ).order(:name).page(params[:page]).per(10)
     @skills = add_search @skills
 
+    authorize! :read, @team
+
     add_breadcrumb @team.name, admin_team_path( @team )
     add_breadcrumb 'Skills', admin_team_skills_path( @team )
   end
 
   def update
     @team = Team.find params[:team_id]
+    authorize! :recommend, Skill
+    authorize! :read, @team
     @skill = Skill.find params[:id]
     @team.skills << @skill
     @skill.reload
@@ -21,6 +25,8 @@ class Admin::TeamSkillsController < ApplicationController
 
   def destroy
     @team = Team.find params[:team_id]
+    authorize! :recommend, Skill
+    authorize! :read, @team
     @skill = Skill.find params[:id]
     @skill.teams.delete( @team )
     @team.reload

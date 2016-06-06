@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
     @teams = @user.teams.includes(:skills).order :name
     @claims = @user.claims.includes(:skill).order('skills.name')
     add_breadcrumb @user.name, admin_user_path( @user )
-    authorize! :read, User
+    authorize! :read, @user
   end
 
   def edit
@@ -42,7 +42,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require( :user ).permit( :name, :email, :password, :password_confirmation )
+    params.require( :user ).permit( :name, :email, :password, :password_confirmation, :admin )
   end
 
   def add_search users

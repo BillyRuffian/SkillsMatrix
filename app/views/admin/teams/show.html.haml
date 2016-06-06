@@ -1,17 +1,22 @@
 - content_for :content_title do
-  .dropdown
-    .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-      = @team.name
-      %span.caret
-    %ul.dropdown-menu
-      %li
-        %a{ href: edit_admin_team_path(@team) }
-          %i.fa.fa-pencil-square
-          Edit
-      %li
-        = link_to admin_team_path(@team), method: :delete, data: {confirm: "Are you sure you want to delete the '#{@team.name}' team?"} do
-          %i.fa.fa-trash
-          Delete
+  - if can?( :edit, @team ) || can?(:destroy, @team )
+    .dropdown
+      .dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        = @team.name
+        %span.caret
+      %ul.dropdown-menu
+        - if can? :edit, @team
+          %li
+            %a{ href: edit_admin_team_path(@team) }
+              %i.fa.fa-pencil-square
+              Edit
+        - if can? :destroy, @team
+          %li
+            = link_to admin_team_path(@team), method: :delete, data: {confirm: "Are you sure you want to delete the '#{@team.name}' team?"} do
+              %i.fa.fa-trash
+              Delete
+  - else
+    = @team.name
 
 .row
   .col-md-6
@@ -21,16 +26,21 @@
         %h3.box-title Team leader
       .box-body
         - if @team.leader
-          %p= link_to @team.leader.name, admin_user_path( @team.leader )
+          %p
+            - if can? :read, @team.leader
+              = link_to @team.leader.name, admin_user_path( @team.leader )
+            - else
+              = @team.leader.name
         - else
           %p No team leader assigned
 
     .box.box-primary
       .box-header.with-border
         %h3.box-title Members
-        .box-tools
-          %a{ href: admin_team_users_path(@team)}
-            %small Change Staff
+        - if can? :assign, User
+          .box-tools
+            %a{ href: admin_team_users_path(@team)}
+              %small Change Staff
       .box-body.table-response
         - if ! @users.blank?
           %table.table
@@ -43,7 +53,11 @@
             %tbody
               - @users.each do |user|
                 %tr
-                  %td= link_to user.name, admin_user_path( user )
+                  %td
+                    - if can? :read, user
+                      = link_to user.name, admin_user_path( user )
+                    - else
+                      = user.name
                   %td= Skill.for_user(user).acquired.count
                   %td
                     - if ! @skills.blank?
@@ -58,9 +72,10 @@
     .box.box-warning
       .box-header.with-border
         %h3.box-title Recommended skills
-        .box-tools
-          %a{ href: admin_team_skills_path(@team) }
-            %small Change skills
+        - if can? :recommend, Skill
+          .box-tools
+            %a{ href: admin_team_skills_path(@team) }
+              %small Change skills
       .box-body.table-response
         - if ! @skills.blank?
           %table.table

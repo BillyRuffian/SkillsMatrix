@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :claims, -> { includes :skill }, dependent: :destroy
   has_and_belongs_to_many :teams
   has_many :recommended_skills, through: :teams, source: :skills
-  has_many :skills_claimed, -> {uniq}, through: :claims, source: :skill
+  has_many :skills_claimed, -> {distinct}, through: :claims, source: :skill
   has_many :leads, class_name: 'Team', foreign_key: :leader_id, inverse_of: :leader
 
   validates_presence_of :name
@@ -28,4 +28,5 @@ class User < ApplicationRecord
   def team_leader_of? team
     leads.includes? team
   end
+
 end
