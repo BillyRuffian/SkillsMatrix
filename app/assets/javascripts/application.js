@@ -16,21 +16,22 @@
 //= require jquery-ui/autocomplete
 //= require autocomplete-rails
 //= require Chart
-//  disabled turbolinks require turbolinks
+//= require turbolinks
 //= require AdminLTE/bootstrap/js/bootstrap
 //= require AdminLTE
 //= require jquery-slimscroll/jquery.slimscroll.min
 //= require_tree .
 //= require_self
 
-function ready(fn) {
-  if (document.readyState != 'loading'){
-    fn();
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
+var ready;
+ready = function(){
+  $.AdminLTE.layout.activate();
+  determineDropDirection();
+  $('.clearable').trigger("input");
 }
 
+$(document).ready(ready);
+$(document).on('turbolinks:load', ready);
 
 // MENU DROP DIRECTION
 function determineDropDirection(){
@@ -55,12 +56,9 @@ function determineDropDirection(){
   });
 }
 
-determineDropDirection();
 
 $(window).scroll(determineDropDirection);
 $(window).resize(determineDropDirection);
-
-ready( determineDropDirection );
 
 
 // CLEARABLE INPUT
@@ -77,9 +75,6 @@ $(document).on('input', '.clearable', function(){
     }
 });
 
-ready( function(){
-  $('.clearable').trigger("input");
-});
 
 // URL PARAMETERS
 var getUrlParameter = function getUrlParameter(sParam) {

@@ -1,51 +1,54 @@
 <script type="text/javascript">
-  function ready(fn) {
-    if (document.readyState != 'loading') {
-      fn();
-    }
-    else {
-      document.addEventListener('DOMContentLoaded', fn);
-    }
-  }
+  var ctx = document.getElementById("claims-bar-chart").getContext("2d");
+  ctx.canvas.originalwidth = ctx.canvas.width;
+  ctx.canvas.originalheight = ctx.canvas.height;
 
-  ready( function() {
-    var ctx = document.getElementById("claims-bar-chart");
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ["Expert skill", "Good skill", "Basic skill", "Training need"],
-        datasets: [{
-          label: '# of skills',
-          backgroundColor: '#3c8dbc',
-          data: [
-            <%= claims.to_a.count{|c| c.level == :expert   } %>,
-            <%= claims.to_a.count{|c| c.level == :good     } %>,
-            <%= claims.to_a.count{|c| c.level == :basic    } %>,
-            <%= claims.to_a.count{|c| c.level == :training } %>
-          ]
-        }]
-      },
-      options: {
-        legend:{
-          display: false
-        },
-        tooltips: {
-          enabled: false
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true,
-              stepSize: 1
-            }
-          }],
-          xAxes: [{
-            gridLines: {
-              display: false
-            }
+  var readyChart = function() {
+    if( ctx ) {
+      ctx.canvas.width = ctx.canvas.originalwidth;
+    ctx.canvas.height = ctx.canvas.originalheight;
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["Expert skill", "Good skill", "Basic skill", "Training need"],
+          datasets: [{
+            label: '# of skills',
+            backgroundColor: '#3c8dbc',
+            data: [
+              <%= claims.to_a.count{|c| c.level == :expert   } %>,
+              <%= claims.to_a.count{|c| c.level == :good     } %>,
+              <%= claims.to_a.count{|c| c.level == :basic    } %>,
+              <%= claims.to_a.count{|c| c.level == :training } %>
+            ]
           }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          legend:{
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero:true,
+                stepSize: 1
+              }
+            }],
+            xAxes: [{
+              gridLines: {
+                display: false
+              }
+            }]
+          }
         }
-      }
-    });
-  })
+      });
+    };
+  };
+
+  $(document).ready(readyChart);
+  $(document).on('turbolinks:load', readyChart);
 </script>
