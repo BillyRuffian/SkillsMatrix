@@ -11,6 +11,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
   %body{ class: "hold-transition skin-blue fixed sidebar-mini #{controller_name} #{action_name}" }
+    .turbolinks-progress-bar
     / Site wrapper
     .wrapper
       %header.main-header
