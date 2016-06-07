@@ -42,6 +42,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-ionicons'
 end
 gem 'chart-js-rails'
+gem "exception_handler"
 
 
 group :development, :test do

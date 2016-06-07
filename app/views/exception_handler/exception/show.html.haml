@@ -1,0 +1,12 @@
+- content_for :content_title do
+  Error
+  = @exception.status
+- content_for :content_subtitle do
+  = details[:name]
+
+.error-page
+  %h2.headline.text-red= @exception.status
+  .error-content
+    %h3 Oops, something went wrong
+    %p= details[:description]
+    %p= link_to 'Go to the homepage', root_path
