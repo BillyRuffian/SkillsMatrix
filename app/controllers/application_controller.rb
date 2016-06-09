@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :authenticate_user!
+  before_action :set_mailer_host
+
   before_action :check_for_new_skills
   before_action :get_team_names
 
@@ -25,10 +27,22 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_for_resource
-    if devise_controller? && !( controller_name = 'registrations' && ( action_name == 'edit' || action_name == 'update') )
+    if devise_controller? && ( ! profile_edit_action? || password_reset_action? )
       "session"
     else
       "application"
     end
+  end
+
+  def set_mailer_host
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
+  def profile_edit_action?
+    controller_name = 'registrations' && ( action_name == 'edit' || action_name == 'update')
+  end
+
+  def password_reset_action?
+    controller_name = 'passwords' && action_name = 'edit' && ! params[:reset_password_token].blank?
   end
 end

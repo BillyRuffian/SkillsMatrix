@@ -86,4 +86,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Mail setup
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "email-smtp.eu-west-1.amazonaws.com",
+    :port => 587, # Port 25 is throttled on AWS
+    :user_name => ENV['SES_USERNAME'], # Your SMTP user here.
+    :password => ENV['SES_PASSWORD'], # Your SMTP password here.
+    :authentication => :login,
+    :enable_starttls_auto => true,
+    :domain => 'glorious.io'
+  }
 end

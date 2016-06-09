@@ -1,0 +1,18 @@
+%p.login-box-msg
+  Forgotten your password?
+
+  = session_error_messages!
+
+
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+
+  .form-group.has-feedback
+    = f.email_field :email, placeholder: 'Your email address', class: 'form-control'
+    %span.fa.fa-envelope.form-control-feedback
+
+  .row
+    .col-xs-offset-8.col-xs-4
+      %button.btn.btn-primary.btn-block.btn-flat{:type => "submit"}
+        Recover
+
+= render "devise/shared/links"
