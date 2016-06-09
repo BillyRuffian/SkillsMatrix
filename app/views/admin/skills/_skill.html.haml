@@ -1,7 +1,7 @@
 %tr
   %td= link_to skill.name, admin_skill_path( skill )
   %td= skill.context
-  %td
-    %small.text-muted= skill.description
+  /%td
+  /  %small.text-muted= skill.description
   %td= skill.claims.acquired.count
   %td= skill.claims.training.count
