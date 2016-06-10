@@ -12,13 +12,17 @@ class User < ApplicationRecord
   has_many :leads, class_name: 'Team', foreign_key: :leader_id, inverse_of: :leader
   validates :email,
             presence: true,
-            uniqueness: true,
-            format: {
-              with: /\A[A-Z0-9._%+-]+@[A-Z0-9.-]*dvla[A-Z0-9.-]*gov\.uk\z/i,
-              message: 'must be a valid DVLA \'digital\' or GSI address'
-            }
+            uniqueness: true#,
+            #format: {
+            #  with: /\A[A-Z0-9._%+-]+@[A-Z0-9.-]*dvla[A-Z0-9.-]*gov\.uk\z/i,
+            #  message: 'must be a valid DVLA \'digital\' or GSI address'
+            #}
 
   validates_presence_of :name
+
+  scope :administrators, -> { where( admin: true ) }
+
+  after_create :notify_administrators
 
   def first_sign_in?
     current_sign_in_at == last_sign_in_at
@@ -34,6 +38,10 @@ class User < ApplicationRecord
 
   def team_leader_of? team
     leads.includes? team
+  end
+
+  def notify_administrators
+    Admin::AdminMailer.new_registration_email( self ).deliver_later
   end
 
 end
