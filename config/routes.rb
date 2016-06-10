@@ -20,7 +20,12 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  root to: 'welcome#index'
+  # avoid annoying message
+  # https://github.com/plataformatec/devise/wiki/How-To:-Require-authentication-for-all-pages
+  authenticated :user do
+    root to: 'welcome#index', as: :authenticated_root
+  end
+  root to: redirect('/users/sign_in')
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
