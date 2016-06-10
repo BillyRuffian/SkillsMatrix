@@ -1,13 +1,18 @@
 <script type="text/javascript">
   var ctx = document.getElementById("claims-bar-chart").getContext("2d");
+  var myChart;
   ctx.canvas.originalwidth = ctx.canvas.width;
   ctx.canvas.originalheight = ctx.canvas.height;
 
   var readyChart = function() {
+    if( myChart ) {
+      myChart.destroy();
+    }
     if( ctx ) {
       ctx.canvas.width = ctx.canvas.originalwidth;
-    ctx.canvas.height = ctx.canvas.originalheight;
-      var myChart = new Chart(ctx, {
+      ctx.canvas.height = ctx.canvas.originalheight;
+
+      myChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: ["Expert skill", "Good skill", "Basic skill", "Training need"],
