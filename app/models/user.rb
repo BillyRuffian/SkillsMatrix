@@ -10,6 +10,13 @@ class User < ApplicationRecord
   has_many :recommended_skills, through: :teams, source: :skills
   has_many :skills_claimed, -> {distinct}, through: :claims, source: :skill
   has_many :leads, class_name: 'Team', foreign_key: :leader_id, inverse_of: :leader
+  validates :email,
+            presence: true,
+            uniqueness: true,
+            format: {
+              with: /\A[A-Z0-9._%+-]+@[A-Z0-9.-]*dvla[A-Z0-9.-]*gov\.uk\z/i,
+              message: 'must be a valid DVLA \'digital\' or GSI address'
+            }
 
   validates_presence_of :name
 
