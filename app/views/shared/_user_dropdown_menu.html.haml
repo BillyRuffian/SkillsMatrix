@@ -14,10 +14,10 @@
                 = pluralize( current_user.claims.count, 'skill' )
                 and
                 = pluralize( current_user.teams.count, 'team' )
-          %li.user-body
-            .row
-              .col-xs-12.text-center
-                %a{ href: '#' } Fortune cookie
+          /%li.user-body
+          /  .row
+          /    .col-xs-12.text-center
+          /      %a{ href: '#' } Fortune cookie
           %li.user-footer
             .pull-left
               = link_to 'profile', edit_user_registration_path, class: 'btn btn-default btn-flat'
