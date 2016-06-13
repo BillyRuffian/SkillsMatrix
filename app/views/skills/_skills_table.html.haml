@@ -9,8 +9,42 @@
           %th Name
           %th Type
           / %th Description
-          %th Expertise
+          %th
+            Expertise
+            %a.help{ "data-target" => ".instructions", "data-toggle" => "modal"}
+              %i.fa.fa-question-circle
+
       %tbody
         = render skills
   .box-footer
     = paginate skills, window: 3
+
+
+.modal.fade.instructions{"aria-labelledby" => "instructions", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &#215;
+        %h4#myModalLabel.modal-title Skill levels
+      .modal-body
+        %dl
+          %dt Not needed
+          %dd
+            I don't have a need of the skill to perform my current role
+          %dt Trainined needed
+          %dd
+            I don't have any level of expertise with the skill and I need to
+            acquire it to perform my role
+          %dt Basic
+          %dd
+            I have some basic knowledge of the skill but usually need some support
+            when I encounter something new
+          %dt Good
+          %dd
+            I have a good grounding in the skill and I'm able to help and advise
+            others but sometimes I need to seek advise and guidance
+          %dt Expert
+          %dd
+            I am a subject matter expert at using this skill and I am confident
+            in being able to advise others
