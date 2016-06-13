@@ -9,7 +9,7 @@ class Ability
     end
 
     if user.team_leader?
-      can :read, Team, leader_id: user.id
+      can :read, Team, user_id: user.id
 
       can :read, Skill
       can :recommend, Skill

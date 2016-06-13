@@ -56,7 +56,7 @@ class Admin::TeamsController < ApplicationController
   private
 
   def team_params
-    params.require( :team ).permit( :name, :leader_id )
+    params.require( :team ).permit( :name, :user_id )
   end
 
 end
