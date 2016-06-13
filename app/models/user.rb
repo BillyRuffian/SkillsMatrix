@@ -9,20 +9,20 @@ class User < ApplicationRecord
   has_and_belongs_to_many :teams
   has_many :recommended_skills, through: :teams, source: :skills
   has_many :skills_claimed, -> {distinct}, through: :claims, source: :skill
-  has_many :leads, class_name: 'Team', foreign_key: :leader_id, inverse_of: :leader
+  has_many :leads, class_name: 'Team', foreign_key: :user_id, inverse_of: :leader
   validates :email,
             presence: true,
-            uniqueness: true#,
-            #format: {
-            #  with: /\A[A-Z0-9._%+-]+@[A-Z0-9.-]*dvla[A-Z0-9.-]*gov\.uk\z/i,
-            #  message: 'must be a valid DVLA \'digital\' or GSI address'
-            #}
+            uniqueness: true,
+            format: {
+              with: /\A[A-Z0-9._%+-]+@[A-Z0-9.-]*dvla[A-Z0-9.-]*gov\.uk\z/i,
+              message: 'must be a valid DVLA \'digital\' or GSI address'
+            }
 
   validates_presence_of :name
 
   scope :administrators, -> { where( admin: true ) }
 
-  after_create :notify_administrators
+  after_commit :notify_administrators, on: :create
 
   def first_sign_in?
     current_sign_in_at == last_sign_in_at
@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def notify_administrators
-    Admin::AdminMailer.new_registration_email( self ).deliver_later
+    SendNewRegistrationEmailJob.perform_async self
   end
 
 end
