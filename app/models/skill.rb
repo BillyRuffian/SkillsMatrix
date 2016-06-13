@@ -4,6 +4,7 @@ class Skill < ApplicationRecord
 
   has_and_belongs_to_many :teams
 
+  validates_presence_of :name
   validates_uniqueness_of :name
 
   scope :for_user, -> user { joins(:claims).where( 'claims.user_id = ?', user.id) }
