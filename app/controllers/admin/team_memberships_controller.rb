@@ -20,6 +20,8 @@ class Admin::TeamMembershipsController < ApplicationController
     authorize! :read, @team
     authorize! :assign, @user
 
+    current_teams = @user.teams.clone
+
     if ! @user.teams.blank? && ( @user.teams - [@team]).count >= 1
       if !params[:confirmation].blank? && [:add, :move].include?(params[:confirmation].to_sym)
         if params[:confirmation].to_sym == :add
@@ -34,6 +36,7 @@ class Admin::TeamMembershipsController < ApplicationController
       @team.users << @user
     end
     @user.reload
+    SendTeamChangedEmailJob.perform_async @user, current_user
     render 'update_membership' unless performed?
   end
 

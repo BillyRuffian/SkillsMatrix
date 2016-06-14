@@ -1,0 +1,20 @@
+SkillsMatrix: a new user has registered
+
+Hello,
+
+#{@new_user.name} has created a SkillsMatrix account. Please visit
+the teams pages to assign them to a team.
+
+= admin_teams_url
+
+SkillsMatrix: your team assignments have changed
+
+Hello,
+
+You are now assigned to #{@user.teams.map{ |t| t.name }.to_sentence}.
+
+Visit your dashboard and review your skills list.
+
+= root_url
+
+Changed by #{@administrator.name}

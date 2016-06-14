@@ -1,0 +1,16 @@
+%p SkillsMatrix: your team assignments have changed
+
+%p
+  Hello,
+
+%p
+  You are now assigned to
+  = @user.teams.map{ |t| t.name }.to_sentence
+  Visit your
+  = link_to 'dashboard', root_url
+  and review your skills list.
+
+%p
+  %small
+    Changed by
+    = @administrator.name
