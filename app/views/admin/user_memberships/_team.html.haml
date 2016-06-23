@@ -1,0 +1,20 @@
+%tr{ id: team.id }
+  %td= team.name
+  %td
+    .btn-group.btn-fill
+      %a{class: "btn btn-sm btn-default dropdown-toggle btn-fill #{user.member_of?(team) ? 'bg-green' : nil}", 'data-toggle': 'dropdown'}
+        - if( user.member_of? team )
+          Assigned
+        - else
+          Unassigned
+        %span.caret
+      %ul.dropdown-menu.pull-right
+        %li.dropdown-header
+          = team.name
+        %li.divider{role: 'separator'}
+        - if( user.member_of? team )
+          %li
+            = link_to '<i class="fa fa-minus-square"></i>Remove from team'.html_safe, admin_user_team_path( user, team) , method: :delete, remote: true
+        - else
+          %li
+            = link_to '<i class="fa fa-plus-square"></i>Add to team'.html_safe, admin_user_team_path( user, team ), method: :put, remote: true

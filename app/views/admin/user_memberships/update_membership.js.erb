@@ -1,0 +1,1 @@
+$('#<%= @team.id %>').replaceWith("<%= escape_javascript( render( partial: 'team', locals: {user: @user, team: @team}) )%>");

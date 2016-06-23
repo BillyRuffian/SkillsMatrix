@@ -10,34 +10,36 @@ class Admin::TeamMembershipsController < ApplicationController
     add_breadcrumb @team.name, admin_team_path( @team )
     add_breadcrumb 'Members', admin_team_users_path( @team )
 
-    authorize! :reader, User
+    authorize! :read, User
   end
 
   def update
-    @team = Team.find params[:team_id]
-    @user = User.find params[:id]
+    transaction do
+      @team = Team.find params[:team_id]
+      @user = User.find params[:id]
 
-    authorize! :read, @team
-    authorize! :assign, @user
+      authorize! :read, @team
+      authorize! :assign, @user
 
-    current_teams = @user.teams.clone
+      current_teams = @user.teams.clone
 
-    if ! @user.teams.blank? && ( @user.teams - [@team]).count >= 1
-      if !params[:confirmation].blank? && [:add, :move].include?(params[:confirmation].to_sym)
-        if params[:confirmation].to_sym == :add
-          @user.teams << @team unless @user.member_of? @team
+      if ! @user.teams.blank? && ( @user.teams - [@team]).count >= 1
+        if !params[:confirmation].blank? && [:add, :move].include?(params[:confirmation].to_sym)
+          if params[:confirmation].to_sym == :add
+            @user.teams << @team unless @user.member_of? @team
+          else
+            @user.teams = [@team]
+          end
         else
-          @user.teams = [@team]
+          render :confirm_team
         end
       else
-        render :confirm_team
+        @team.users << @user
       end
-    else
-      @team.users << @user
+      @user.reload
+      SendTeamChangedEmailJob.perform_async @user, current_user
+      render 'update_membership' unless performed?
     end
-    @user.reload
-    SendTeamChangedEmailJob.perform_async @user, current_user
-    render 'update_membership' unless performed?
   end
 
   def destroy

@@ -1,0 +1,26 @@
+- content_for :content_title do
+  Change team membership
+- content_for :content_subtitle do
+  for
+  = @user.name
+
+.row
+  .col-md-12
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Teams
+        = render partial: 'shared/table_search'
+      .box-body.table-response
+        - if ! @teams.blank?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Team
+                %th
+            %tbody
+              - @teams.each do |team|
+                = render partial: 'team', locals: {user: @user, team: team}
+        - else
+          %p There don't seem to be any teams in the database
+      .box-footer
+        = paginate @teams, window: 3

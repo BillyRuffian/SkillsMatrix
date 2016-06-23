@@ -68,6 +68,10 @@
       .box-header.with-border
         %h4.box-title
           Team memberships
+        - if can? :assign, User
+          .box-tools
+            %a{ href: admin_user_teams_path(@user)}
+              %small Change Teams
       .box-body.table-response
         - if ! @teams.blank?
           %table.table
