@@ -43,6 +43,12 @@
             = render_breadcrumbs tag: :li, separator: ''
         / Main content
         %section.content
+          #internet-explorer-warning
+            .callout.callout-warning
+              %h4 Internet Explorer is not supported
+              %p
+                For a better and more reliable experience,
+                please use a modern browser such as Chrome, Safari or Firefox
           - if alert
             .callout.callout-danger
               %h4 Oops

@@ -28,6 +28,11 @@ ready = function(){
   $.AdminLTE.layout.activate();
   determineDropDirection();
   $('.clearable').trigger("input");
+
+  if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) == 1)
+  {
+    $('#internet-explorer-warning').show();
+  }
 }
 
 $(document).ready(ready);
