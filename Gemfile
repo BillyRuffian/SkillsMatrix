@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml-rails'
 gem 'cancancan'
 gem 'devise'
-gem "kaminari", github: "amatsuda/kaminari"
+gem "kaminari"
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem 'breadcrumbs_on_rails'
@@ -50,7 +50,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'faker'
-  gem 'rspec-rails', '3.5.0.beta1'
+  gem 'rspec-rails', require: false
   gem "factory_girl_rails"
   gem 'rails-controller-testing'
 end
@@ -66,7 +66,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara", git: 'https://github.com/jnicklas/capybara.git'
+  gem "capybara" #, git: 'https://github.com/jnicklas/capybara.git'
   gem "database_cleaner"
   gem "shoulda-matchers"
   gem 'email_spec'
