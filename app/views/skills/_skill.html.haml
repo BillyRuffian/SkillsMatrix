@@ -1,7 +1,7 @@
 - claim = skill_claim_for_user( current_user, skill )
 %tr{id: skill.id}
   %td= skill.name
-  %td= skill.context
+  %td.hidden-xs= skill.context
   /%td
   /  %small.text-muted= skill.description
   %td

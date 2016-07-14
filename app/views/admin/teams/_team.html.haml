@@ -10,5 +10,5 @@
         = link_to team.leader.name, admin_user_path( team.leader )
       - else
         = team.leader.name
-  %td= team.users.count
-  %td= team.skills.count
+  %td.hidden-xs= team.users.count
+  %td.hidden-xs= team.skills.count
